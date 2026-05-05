@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Yuzuu — Early Access</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F9F7F3;
+    --bg-card: #FFFFFF;
+    --bg-raised: #F3F1ED;
+    --text: #111110;
+    --text-muted: #6B6960;
+    --text-faint: #A09D96;
+    --border: rgba(17,17,16,0.10);
+    --border-med: rgba(17,17,16,0.18);
+    --accent: #1A6B4A;
+    --accent-light: #E4F2EB;
+    --accent-text: #0F4A31;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', system-ui, sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 48px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-logo { font-family: var(--serif); font-size: 22px; color: var(--text); letter-spacing: -0.01em; text-decoration: none; }
+  .btn-nav { background: var(--text); color: var(--bg); border: none; padding: 10px 22px; border-radius: 6px; font-family: var(--sans); font-size: 14px; font-weight: 500; cursor: pointer; text-decoration: none; transition: opacity 0.15s; }
+  .btn-nav:hover { opacity: 0.82; }
+
+  /* HERO */
+  .hero { padding: 88px 48px 80px; max-width: 1100px; margin: 0 auto; }
+
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: var(--accent-light); color: var(--accent-text); font-size: 13px; font-weight: 500; padding: 5px 14px; border-radius: 100px; margin-bottom: 32px; }
+  .hero-tag::before { content: ''; display: block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+  .hero h1 { font-family: var(--serif); font-size: clamp(40px, 5.5vw, 64px); font-weight: 400; line-height: 1.06; letter-spacing: -0.02em; max-width: 860px; margin-bottom: 28px; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-sub { font-size: 19px; color: var(--text-muted); max-width: 540px; line-height: 1.65; font-weight: 300; margin-bottom: 44px; }
+
+  .signup-form { display: flex; gap: 10px; margin-bottom: 16px; max-width: 480px; }
+  .signup-input { flex: 1; padding: 13px 18px; border: 1px solid var(--border-med); border-radius: 8px; background: var(--bg-card); font-family: var(--sans); font-size: 15px; color: var(--text); outline: none; transition: border-color 0.15s, box-shadow 0.15s; }
+  .signup-input::placeholder { color: var(--text-faint); }
+  .signup-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,107,74,0.10); }
+
+  .btn-primary { background: var(--accent); color: #fff; border: none; padding: 13px 24px; border-radius: 8px; font-family: var(--sans); font-size: 15px; font-weight: 500; cursor: pointer; white-space: nowrap; transition: background 0.15s; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .btn-primary:hover { background: var(--accent-text); }
+
+  .form-note { font-size: 13px; color: var(--text-faint); }
+
+  .proof-strip { margin-top: 48px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .proof-avatars { display: flex; align-items: center; }
+  .proof-avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--bg-raised); border: 2px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--text-muted); margin-left: -8px; }
+  .proof-avatar:first-child { margin-left: 0; }
+  .proof-count { font-size: 14px; font-weight: 500; color: var(--text); }
+  .proof-sep { color: var(--text-faint); font-size: 13px; }
+  .proof-label { font-size: 13px; color: var(--text-faint); }
+
+  /* DIVIDER */
+  .divider { height: 1px; background: var(--border); max-width: 1100px; margin: 0 auto; }
+
+  /* SECTIONS */
+  .section { padding: 72px 48px; max-width: 1100px; margin: 0 auto; }
+  .section-label { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.10em; color: var(--text-faint); margin-bottom: 14px; }
+  .section h2 { font-family: var(--serif); font-size: clamp(28px, 3.5vw, 40px); font-weight: 400; line-height: 1.12; letter-spacing: -0.02em; margin-bottom: 14px; }
+  .section h2 em { font-style: italic; color: var(--accent); }
+  .section-sub { font-size: 16px; color: var(--text-muted); max-width: 520px; line-height: 1.65; margin-bottom: 44px; font-weight: 300; }
+
+  /* PROBLEM */
+  .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .problem-quote { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 32px; grid-column: 1 / -1; }
+  .problem-quote blockquote { font-family: var(--serif); font-size: 22px; font-style: italic; line-height: 1.45; color: var(--text); margin-bottom: 14px; }
+  .problem-quote cite { font-size: 13px; color: var(--text-muted); font-style: normal; }
+  .problem-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; display: flex; gap: 16px; align-items: flex-start; }
+  .problem-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .problem-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; line-height: 1.3; }
+  .problem-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* STEPS */
+  .steps { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--border); gap: 1px; }
+  .step-row { background: var(--bg-card); padding: 28px 32px; display: grid; grid-template-columns: 48px 1fr auto; gap: 20px; align-items: start; transition: background 0.15s; }
+  .step-row:hover { background: var(--bg-raised); }
+  .step-num { width: 36px; height: 36px; border-radius: 8px; background: var(--accent-light); color: var(--accent-text); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 13px; font-weight: 500; flex-shrink: 0; }
+  .step-content h3 { font-size: 16px; font-weight: 500; margin-bottom: 6px; line-height: 1.3; }
+  .step-content p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+  .step-tag { display: inline-flex; align-items: center; padding: 4px 10px; background: var(--bg-raised); border: 1px solid var(--border); border-radius: 20px; font-size: 12px; color: var(--text-faint); white-space: nowrap; font-family: var(--mono); margin-top: 4px; }
+
+  /* MOCKUP */
+  .mockup-wrap { margin-top: 40px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+  .mockup-bar { background: var(--text); padding: 14px 20px; display: flex; align-items: center; gap: 8px; }
+  .mockup-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+  .mockup-title { font-size: 13px; color: rgba(255,255,255,0.4); margin-left: 8px; font-family: var(--mono); }
+  .mockup-body { padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+
+  .lead-card { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start; }
+  .lead-card.hot { border-color: rgba(26,107,74,0.3); background: var(--accent-light); }
+  .lead-name { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+  .lead-meta { font-size: 13px; color: var(--text-muted); }
+  .lead-pills { display: flex; gap: 6px; margin-top: 10px; flex-wrap: wrap; }
+  .pill { display: inline-flex; align-items: center; gap: 4px; padding: 3px 9px; border-radius: 4px; font-size: 12px; font-family: var(--mono); }
+  .pill-bad { background: #FEE9E9; color: #B91C1C; }
+  .pill-warn { background: #FEF3CD; color: #92400E; }
+  .pill-good { background: var(--accent-light); color: var(--accent-text); }
+  .score-badge { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 52px; height: 52px; border-radius: 10px; background: var(--bg-card); border: 1px solid var(--border); flex-shrink: 0; }
+  .score-badge.high { background: var(--accent-light); border-color: rgba(26,107,74,0.2); }
+  .score-num { font-family: var(--mono); font-size: 18px; font-weight: 500; color: var(--text); line-height: 1; }
+  .score-badge.high .score-num { color: var(--accent-text); }
+  .score-lbl { font-size: 10px; color: var(--text-faint); margin-top: 2px; }
+  .enrich-row { display: flex; align-items: center; gap: 8px; margin-top: 12px; }
+  .enrich-btn { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; background: var(--text); color: var(--bg); border: none; border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer; font-family: var(--sans); transition: opacity 0.15s; }
+  .enrich-btn:hover { opacity: 0.82; }
+  .enrich-ghost { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; background: transparent; color: var(--text-muted); border: 1px solid var(--border); border-radius: 6px; font-size: 13px; cursor: pointer; font-family: var(--sans); }
+
+  /* FEATURES */
+  .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .feature-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; padding: 28px; }
+  .feature-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--accent-light); display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 16px; }
+  .feature-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 8px; line-height: 1.3; }
+  .feature-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+
+  /* EARLY ACCESS DEAL */
+  .deal-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: start; }
+  .deal-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+  .deal-list li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; color: var(--text-muted); line-height: 1.5; }
+  .deal-check { width: 20px; height: 20px; border-radius: 50%; background: var(--accent-light); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 2px; }
+  .deal-form-side h3 { font-family: var(--serif); font-size: 26px; font-weight: 400; line-height: 1.2; margin-bottom: 8px; letter-spacing: -0.01em; }
+  .deal-form-side h3 em { font-style: italic; color: var(--accent); }
+  .deal-form-side > p { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.6; }
+  .deal-input-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px; }
+  .deal-input { padding: 12px 16px; border: 1px solid var(--border-med); border-radius: 8px; background: var(--bg); font-family: var(--sans); font-size: 14px; color: var(--text); outline: none; transition: border-color 0.15s, box-shadow 0.15s; width: 100%; }
+  .deal-input::placeholder { color: var(--text-faint); }
+  .deal-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(26,107,74,0.10); }
+  .deal-note { font-size: 12px; color: var(--text-faint); margin-top: 10px; }
+
+  /* CTA BAND */
+  .cta-band { background: var(--text); padding: 80px 48px; text-align: center; }
+  .cta-band h2 { font-family: var(--serif); font-size: clamp(30px, 4vw, 48px); font-weight: 400; color: var(--bg); line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .cta-band h2 em { font-style: italic; color: #9CE8C0; }
+  .cta-band p { font-size: 17px; color: rgba(249,247,243,0.50); max-width: 420px; margin: 0 auto 36px; font-weight: 300; line-height: 1.6; }
+  .btn-cta { background: var(--accent); color: #fff; border: none; padding: 15px 32px; border-radius: 8px; font-family: var(--sans); font-size: 16px; font-weight: 500; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; transition: background 0.15s; }
+  .btn-cta:hover { background: #155a3d; }
+  .cta-subnote { font-size: 13px; color: rgba(249,247,243,0.28); margin-top: 16px; }
+
+  /* FOOTER */
+  footer { padding: 28px 48px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .footer-logo { font-family: var(--serif); font-size: 18px; color: var(--text); text-decoration: none; }
+  .footer-note { font-size: 13px; color: var(--text-faint); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-tag  { animation: fadeUp 0.5s ease both; }
+  .hero h1   { animation: fadeUp 0.5s ease 0.08s both; }
+  .hero-sub  { animation: fadeUp 0.5s ease 0.16s both; }
+  .signup-form { animation: fadeUp 0.5s ease 0.22s both; }
+  .form-note { animation: fadeUp 0.5s ease 0.26s both; }
+  .proof-strip { animation: fadeUp 0.5s ease 0.32s both; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 20px; }
+    .hero { padding: 52px 20px 52px; }
+    .section { padding: 52px 20px; }
+    .problem-grid, .features-grid { grid-template-columns: 1fr; }
+    .problem-quote { grid-column: 1; }
+    .deal-box { grid-template-columns: 1fr; gap: 32px; }
+    .signup-form { flex-direction: column; }
+    .step-row { grid-template-columns: 40px 1fr; }
+    .step-tag { display: none; }
+    .cta-band { padding: 56px 20px; }
+    footer { flex-direction: column; gap: 8px; padding: 20px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">Yuzuu</a>
+  <a class="btn-nav" href="#early-access">Get early access →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Early access — limited spots</div>
+  <h1>Find local businesses that <em>need exactly</em> what you sell.</h1>
+  <p class="hero-sub">Yuzuu searches Google Maps, scores every lead against your offer, and tells you exactly who to contact — and what to say.</p>
+
+  <div class="signup-form">
+    <input class="signup-input" type="email" placeholder="your@agency.com" />
+    <button class="btn-primary">
+      Request access
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+  </div>
+  <p class="form-note">Free during early access. No credit card required.</p>
+
+  <div class="proof-strip">
+    <div class="proof-avatars">
+      <div class="proof-avatar">MK</div>
+      <div class="proof-avatar">TR</div>
+      <div class="proof-avatar">JS</div>
+      <div class="proof-avatar">AL</div>
+    </div>
+    <span class="proof-count">47 agencies on the waitlist</span>
+    <span class="proof-sep">·</span>
+    <span class="proof-label">Spots opening in June</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROBLEM -->
+<section class="section">
+  <p class="section-label">The problem</p>
+  <h2>Prospecting local businesses is <em>painfully manual</em> today.</h2>
+  <p class="section-sub">Most agencies selling SEO, web design, or reputation management spend hours building lead lists that go nowhere — because the data is shallow and there's no way to know who actually needs your service.</p>
+
+  <div class="problem-grid">
+    <div class="problem-quote">
+      <blockquote>"I spend half my week building lead lists in Google Maps, copy-pasting into spreadsheets, then still not knowing if they even need what I sell. Half the time the business already has a website and I wasted an hour."</blockquote>
+      <cite>— Agency owner, selling local SEO for 3 years</cite>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🕐</div>
+      <div>
+        <h3>Hours wasted on manual research</h3>
+        <p>Finding businesses, checking websites, reading reviews — done by hand, one by one, every prospecting session. No tool ties it together.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🎯</div>
+      <div>
+        <h3>No way to prioritise the list</h3>
+        <p>Raw Google Maps results have no scoring. You're guessing which businesses to contact first — and burning outreach on the wrong ones.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">✉️</div>
+      <div>
+        <h3>Generic outreach that gets ignored</h3>
+        <p>Cold emails without context get deleted. But writing a personalised message for every lead from scratch isn't scalable for a small team.</p>
+      </div>
+    </div>
+    <div class="problem-card">
+      <div class="problem-icon">🔁</div>
+      <div>
+        <h3>No repeatable process</h3>
+        <p>Every prospecting session starts from zero. Different spreadsheets, different tabs, no consistent workflow — pipeline stays thin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <p class="section-label">How it works</p>
+  <h2>From city and category<br>to <em>ready-to-send outreach.</em></h2>
+  <p class="section-sub">Four steps. You stay in control the whole way — Yuzuu does the research between them.</p>
+
+  <div class="steps">
+    <div class="step-row">
+      <div class="step-num">01</div>
+      <div class="step-content">
+        <h3>Tell us what you sell and where you're looking</h3>
+        <p>Enter a business category, a city, and describe your offer in plain English. Yuzuu uses this context to score leads against your specific service — not a one-size-fits-all ranking.</p>
+      </div>
+      <div class="step-tag">2 min setup</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">02</div>
+      <div class="step-content">
+        <h3>Get a scored list of local businesses instantly</h3>
+        <p>Yuzuu pulls businesses from Google Maps and computes a surface score for each one — based on rating, review count, website presence, and fit with your offer. Browse, filter, sort.</p>
+      </div>
+      <div class="step-tag">seconds</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">03</div>
+      <div class="step-content">
+        <h3>Enrich the leads that look promising — on demand</h3>
+        <p>Click "Enrich" on any lead. Yuzuu scrapes their website, checks social presence, and analyses review sentiment. You only pay for leads you actually want to pursue.</p>
+      </div>
+      <div class="step-tag">~20 sec per lead</div>
+    </div>
+    <div class="step-row">
+      <div class="step-num">04</div>
+      <div class="step-content">
+        <h3>Unlock a full score breakdown + personalised email draft</h3>
+        <p>Every enriched lead comes with an opportunity score, a clear explanation of why they need your service, and a cold email that references their specific situation. Copy and send.</p>
+      </div>
+      <div class="step-tag">AI-generated</div>
+    </div>
+  </div>
+
+  <!-- MOCKUP -->
+  <div class="mockup-wrap">
+    <div class="mockup-bar">
+      <div class="mockup-dot"></div>
+      <div class="mockup-dot"></div>
+      <div class="mockup-dot"></div>
+      <span class="mockup-title">Yuzuu — Restaurants · London · Web Design offer</span>
+    </div>
+    <div class="mockup-body">
+
+      <div class="lead-card hot">
+        <div>
+          <div class="lead-name">🍕 Bella Roma Pizzeria</div>
+          <div class="lead-meta">Restaurant · 3.2★ (14 reviews) · Shoreditch, London</div>
+          <div class="lead-pills">
+            <span class="pill pill-bad">✗ No website</span>
+            <span class="pill pill-bad">Below 3.5★</span>
+            <span class="pill pill-warn">Only 14 reviews</span>
+            <span class="pill pill-bad">No social found</span>
+          </div>
+          <div class="enrich-row">
+            <button class="enrich-btn">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              Enriched — View full profile
+            </button>
+          </div>
+        </div>
+        <div class="score-badge high">
+          <div class="score-num">87</div>
+          <div class="score-lbl">score</div>
+        </div>
+      </div>
+
+      <div class="lead-card">
+        <div>
+          <div class="lead-name">✂️ Coiffure Élégance</div>
+          <div class="lead-meta">Hair Salon · 3.8★ (7 reviews) · Hackney, London</div>
+          <div class="lead-pills">
+            <span class="pill pill-bad">✗ No website</span>
+            <span class="pill pill-warn">Very few reviews</span>
+          </div>
+          <div class="enrich-row">
+            <button class="enrich-ghost">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Enrich
+            </button>
+          </div>
+        </div>
+        <div class="score-badge">
+          <div class="score-num">74</div>
+          <div class="score-lbl">score</div>
+        </div>
+      </div>
+
+      <div class="lead-card">
+        <div>
+          <div class="lead-name">🔧 Central Auto Garage</div>
+          <div class="lead-meta">Auto Repair · 4.1★ (22 reviews) · Islington, London</div>
+          <div class="lead-pills">
+            <span class="pill pill-bad">✗ No website</span>
+            <span class="pill pill-good">Active GMB profile</span>
+          </div>
+          <div class="enrich-row">
+            <button class="enrich-ghost">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              Enrich
+            </button>
+          </div>
+        </div>
+        <div class="score-badge">
+          <div class="score-num">61</div>
+          <div class="score-lbl">score</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FEATURES -->
+<section class="section">
+  <p class="section-label">What you get</p>
+  <h2>Built for agencies<br><em>selling to local businesses.</em></h2>
+  <p class="section-sub">Not a generic lead database. A prospecting tool that understands your offer and finds who actually needs it.</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🗺️</div>
+      <h3>Google Maps at scale</h3>
+      <p>Search any city, any business category. Get hundreds of real local businesses with their full GMB data — ratings, reviews, address, website, phone.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎯</div>
+      <h3>Offer-aware scoring</h3>
+      <p>Describe what you sell once. Every lead is scored against your specific offer. A web design agency and a reputation firm get completely different scores for the same business.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <h3>On-demand enrichment</h3>
+      <p>You choose which leads to enrich. Website scrape, social check, review sentiment — only when you ask, so you never pay for leads you'll never use.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Score with reasoning</h3>
+      <p>No black box. Each score comes with a clear breakdown — what signals drove it, what gap exists, and why this business is a better fit than the one below it.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">✉️</div>
+      <h3>Personalised email drafts</h3>
+      <p>Each enriched lead generates a cold email that references their actual situation — missing website, low rating, unanswered reviews. Not a template. A real pitch.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔁</div>
+      <h3>Repeatable weekly workflow</h3>
+      <p>New city, new category, same process. Run Yuzuu every week to keep your pipeline full without spending hours on manual research.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EARLY ACCESS -->
+<section class="section" id="early-access">
+  <p class="section-label">Early access</p>
+  <h2>We're looking for <em>3 agencies</em><br>to use Yuzuu for free.</h2>
+
+  <div class="deal-box">
+    <div>
+      <p style="font-size:15px; color:var(--text-muted); line-height:1.7; margin-bottom:8px;">Yuzuu is in early access. We want to work directly with a handful of agencies to make it genuinely useful — not just technically functional.</p>
+      <p style="font-size:15px; color:var(--text-muted); line-height:1.7;">In exchange for free access, we ask for honest weekly feedback: what's working, what's broken, what's missing.</p>
+      <ul class="deal-list">
+        <li><div class="deal-check">✓</div>Full access to all features — search, scoring, enrichment, email drafts</li>
+        <li><div class="deal-check">✓</div>Unlimited searches and enrichments for the duration of the trial</li>
+        <li><div class="deal-check">✓</div>Direct line to the founder — you shape what gets built next</li>
+        <li><div class="deal-check">✓</div>Locked-in early pricing when paid plans launch</li>
+        <li><div class="deal-check">✓</div>No commitment, no credit card</li>
+      </ul>
+      <p style="font-size:13px; color:var(--text-faint); margin-top:24px;">We'll reach out within 48 hours to schedule a 20-min call. Only 3 spots available in this cohort.</p>
+    </div>
+
+    <div class="deal-form-side">
+      <h3>Apply for <em>free access</em></h3>
+      <p>Tell us about your agency and what you sell — we'll get back to you within 48 hours.</p>
+      <div class="deal-input-group">
+        <input class="deal-input" type="text" placeholder="Your name" />
+        <input class="deal-input" type="email" placeholder="Work email" />
+        <input class="deal-input" type="text" placeholder="Agency name" />
+        <input class="deal-input" type="text" placeholder="What service do you sell to local businesses?" />
+        <textarea class="deal-input" rows="3" placeholder="How do you find leads today? (brief answer)" style="resize:vertical; font-family:var(--sans); line-height:1.5;"></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%; justify-content:center;">
+        Apply for early access
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <p class="deal-note">No commitment. We'll reach out within 48 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <h2>Stop guessing who<br><em>needs what you sell.</em></h2>
+  <p>Let Yuzuu do the research. You show up to the conversation already knowing the pitch.</p>
+  <a href="#early-access" class="btn-cta">
+    Get early access
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+  </a>
+  <p class="cta-subnote">Free during early access · 3 spots remaining</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <a class="footer-logo" href="#">Yuzuu</a>
+  <span class="footer-note">© 2025 Yuzuu. All rights reserved.</span>
+</footer>
+
+</body>
+</html>
