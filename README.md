@@ -136,9 +136,17 @@ index 722b00e..f341d85 100644
 The Next.js app lives in **`demo/`**.
 
 1. Vercel → **Settings** → **Build & Deployment** → **Root Directory** → set **`demo`**, save.
-2. Clear any **custom Install / Build command** that runs `cd demo && …`. With Root Directory `demo`, the build already runs inside `demo`, so `cd demo` fails with “No such file or directory”.
+2. Clear any **custom Install / Build command** that runs `cd demo && …` (dashboard: **Build & Deployment** → turn off overrides, or run the script below). With Root Directory `demo`, the build already runs inside `demo`, so `cd demo` fails with “No such file or directory”.
 
-Redeploy. Default `npm install` and `next build` are correct.
+3. Redeploy. Defaults should be **`npm install` / `npm ci`** and **`next build`**.
+
+**Optional (API):** from the repo root, with a [token](https://vercel.com/account/tokens) and your **project name** (Settings → General):
+
+```bash
+export VERCEL_TOKEN="…"
+export VERCEL_PROJECT="…"
+./scripts/vercel-clear-build-overrides.sh
+```
 
 ## License
 
