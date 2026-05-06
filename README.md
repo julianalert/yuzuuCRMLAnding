@@ -133,14 +133,12 @@ index 722b00e..f341d85 100644
 
 ## Deploying to Vercel
 
-The runnable Next.js app lives in **`demo/`**, not the repository root.
+The Next.js app lives in **`demo/`**.
 
-1. Open your project on Vercel → **Settings** → **Build & Deployment** → **Root Directory**.
-2. Set it to **`demo`**, save, and redeploy.
+1. Vercel → **Settings** → **Build & Deployment** → **Root Directory** → set **`demo`**, save.
+2. Clear any **custom Install / Build command** that runs `cd demo && …`. With Root Directory `demo`, the build already runs inside `demo`, so `cd demo` fails with “No such file or directory”.
 
-With Root Directory set to `demo`, Vercel will detect Next.js, run `npm install` / `next build` in the right folder, and `/` will resolve correctly.
-
-**If you deploy from the repository root instead** (Root Directory left empty), use the root **`vercel.json`**, which installs and builds inside `demo/`. If you later switch to Root Directory = `demo`, remove that file (or remove its `installCommand` / `buildCommand` keys) so paths are not doubled.
+Redeploy. Default `npm install` and `next build` are correct.
 
 ## License
 
