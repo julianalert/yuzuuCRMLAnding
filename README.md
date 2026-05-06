@@ -131,6 +131,17 @@ index 722b00e..f341d85 100644
 
 ```
 
+## Deploying to Vercel
+
+The runnable Next.js app lives in **`demo/`**, not the repository root.
+
+1. Open your project on Vercel → **Settings** → **Build & Deployment** → **Root Directory**.
+2. Set it to **`demo`**, save, and redeploy.
+
+With Root Directory set to `demo`, Vercel will detect Next.js, run `npm install` / `next build` in the right folder, and `/` will resolve correctly.
+
+**If you deploy from the repository root instead** (Root Directory left empty), use the root **`vercel.json`**, which installs and builds inside `demo/`. If you later switch to Root Directory = `demo`, remove that file (or remove its `installCommand` / `buildCommand` keys) so paths are not doubled.
+
 ## License
 
 This site template is a commercial product and is licensed under the [Tailwind Plus license](https://tailwindcss.com/plus/license).
