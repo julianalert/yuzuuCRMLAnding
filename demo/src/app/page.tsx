@@ -159,7 +159,7 @@ export default function Page() {
           headline="A prospecting tool that understands your offer and finds who actually needs it."
           subheadline={
             <p>
-              Stop guessing who needs what you sell. Let Yuzuu do the research. You show up to the conversation already knowing the pitch.
+              Stop guessing who needs what you sell. Let Yuzuu do the research. You receive a list of businesses that are a good fit for your offer.
             </p>
           }
           cta={
