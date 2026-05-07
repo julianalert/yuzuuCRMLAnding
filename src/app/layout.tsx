@@ -55,6 +55,14 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <Script
+          id="simple-analytics-event-queue"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{
+            __html:
+              'window.sa_event=window.sa_event||function(){var a=[].slice.call(arguments);window.sa_event.q?window.sa_event.q.push(a):window.sa_event.q=[a]};',
+          }}
+        />
         {children}
         <Script
           src="https://scripts.simpleanalyticscdn.com/latest.js"

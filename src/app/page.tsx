@@ -1,6 +1,6 @@
 import { AnnouncementBadge } from '@/components/elements/announcement-badge'
 import { ButtonLink, PlainButtonLink, SoftButtonLink } from '@/components/elements/button'
-import { Link } from '@/components/elements/link'
+import { CalendlyEarlyAccessButtonLink, CalendlyHowItWorksLink } from '@/components/elements/calendly-tracking'
 import { Logo, LogoGrid } from '@/components/elements/logo-grid'
 import { Main } from '@/components/elements/main'
 import { Screenshot } from '@/components/elements/screenshot'
@@ -45,7 +45,7 @@ export default function Page() {
           </NavbarLogo>
         }
         actions={
-          <ButtonLink href="https://calendly.com/yuzuu/early-access" target="_blank" rel="noopener noreferrer">Get early access</ButtonLink>
+          <CalendlyEarlyAccessButtonLink>Get early access</CalendlyEarlyAccessButtonLink>
         }
       />
 
@@ -90,9 +90,7 @@ export default function Page() {
           }
           cta={
             <div className="flex items-center gap-4">
-              <ButtonLink href="https://calendly.com/yuzuu/early-access" target="_blank" rel="noopener noreferrer" size="lg">
-                Get early access
-              </ButtonLink>
+              <CalendlyEarlyAccessButtonLink size="lg">Get early access</CalendlyEarlyAccessButtonLink>
             </div>
           }
           demo={
@@ -197,9 +195,9 @@ export default function Page() {
             </p>
           }
           cta={
-            <Link href="https://calendly.com/yuzuu/early-access" target="_blank" rel="noopener noreferrer">
+            <CalendlyHowItWorksLink>
               Show me how it works <ArrowNarrowRightIcon />
-            </Link>
+            </CalendlyHowItWorksLink>
           }
           features={
             <>
@@ -475,9 +473,7 @@ export default function Page() {
           }
           cta={
             <div className="flex items-center gap-4">
-              <ButtonLink href="https://calendly.com/yuzuu/early-access" target="_blank" rel="noopener noreferrer" size="lg">
-               Get early access
-              </ButtonLink>
+              <CalendlyEarlyAccessButtonLink size="lg">Get early access</CalendlyEarlyAccessButtonLink>
 
             </div>
           }
