@@ -312,7 +312,7 @@ export default function Page() {
           headline="Yuzuu starts working for you right away"
           subheadline={
             <p>
-                Your start getting your first calls with businesses in a few days, not weeks.
+                Your start getting your first calls with your ideal customers in a few days, not weeks. All while you focus on closing deals, not outbound prospecting.
             </p>
           }
         >
