@@ -273,46 +273,12 @@ export default function Page() {
                 demo={
                   <Screenshot wallpaper="brown" placement="bottom-left">
                     <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1200&top=736"
-                      alt=""
-                      className="bg-white/75 sm:hidden dark:hidden"
+                      src="/img/pipeline-counter.gif"
+                      alt="Animated counter showing pipeline value growing"
+                      className="w-full bg-white/75 dark:bg-white/10"
                       width={1200}
-                      height={736}
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1200&top=736&color=mist"
-                      alt=""
-                      width={1200}
-                      height={736}
-                      className="bg-black/75 not-dark:hidden sm:hidden"
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1800&top=736"
-                      alt=""
-                      className="bg-white/75 max-sm:hidden lg:hidden dark:hidden"
-                      width={1800}
-                      height={736}
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1800&top=736&color=mist"
-                      alt=""
-                      className="bg-black/75 not-dark:hidden max-sm:hidden lg:hidden"
-                      width={1800}
-                      height={736}
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1200&top=736"
-                      alt=""
-                      className="bg-white/75 max-lg:hidden dark:hidden"
-                      width={1200}
-                      height={736}
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1200&top=736&color=mist"
-                      alt=""
-                      className="bg-black/75 not-dark:hidden max-lg:hidden"
-                      width={1200}
-                      height={736}
+                      height={675}
+                      loading="lazy"
                     />
                   </Screenshot>
                 }
