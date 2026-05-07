@@ -81,11 +81,11 @@ export default function Page() {
         */}
         <HeroLeftAlignedWithDemo
           id="hero"
-          eyebrow={<AnnouncementBadge href="#hero" text="‼️ Free during early access, 3 spots left" />}
-          headline="The first revenue engine for marketing agencies"
+          eyebrow={<AnnouncementBadge href="#hero" text="Free during early access, join now before it's too late" />}
+          headline="Find new customers for your marketing agency on autopilot"
           subheadline={
             <p>
-              Yuzuu finds relevant local businesses, scores each lead against your offer, and tells you exactly who to contact and what to say. You run outbound campaigns on autopilot and manage pipelines in one place.
+              Tell Yuzuu what you sell and where. It finds the local businesses that need it, scores them against your offer, and drafts the pitch. You just show up to the calls.
             </p>
           }
           cta={
@@ -473,7 +473,7 @@ export default function Page() {
           }
           cta={
             <div className="flex items-center gap-4">
-              <CalendlyEarlyAccessButtonLink size="lg">Get early access</CalendlyEarlyAccessButtonLink>
+              <CalendlyEarlyAccessButtonLink size="lg">I want in, start building my pipeline for free</CalendlyEarlyAccessButtonLink>
 
             </div>
           }
