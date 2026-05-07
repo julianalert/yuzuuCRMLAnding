@@ -1,11 +1,9 @@
 import { AnnouncementBadge } from '@/components/elements/announcement-badge'
 import { ButtonLink, PlainButtonLink, SoftButtonLink } from '@/components/elements/button'
-import { EmailSignupForm } from '@/components/elements/email-signup-form'
 import { Link } from '@/components/elements/link'
 import { Logo, LogoGrid } from '@/components/elements/logo-grid'
 import { Main } from '@/components/elements/main'
 import { Screenshot } from '@/components/elements/screenshot'
-import { FocusEmailOnHash } from '@/components/elements/focus-email-on-hash'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
 import { ChevronIcon } from '@/components/icons/chevron-icon'
 import { ClockIcon } from '@/components/icons/clock-icon'
@@ -24,7 +22,7 @@ import {
   FooterWithLinksAndSocialIcons,
   SocialLink,
 } from '@/components/sections/footer-with-links-and-social-icons'
-import { HeroWithDemoOnBackground } from '@/components/sections/hero-with-demo-on-background'
+import { HeroLeftAlignedWithDemo } from '@/components/sections/hero-left-aligned-with-demo'
 import {
   NavbarLink,
   NavbarLogo,
@@ -43,16 +41,15 @@ export default function Page() {
         links={<></>}
         logo={
           <NavbarLogo href="#">
-            <span className="font-['Instrument_Serif'] text-2xl text-olive-950 dark:text-white">Yuzuu</span>
+            <span className="font-['Instrument_Serif'] text-2xl text-mist-950 dark:text-white">Yuzuu</span>
           </NavbarLogo>
         }
         actions={
-          <ButtonLink href="#hero">Get early access</ButtonLink>
+          <ButtonLink href="https://calendly.com/yuzuu/early-access" target="_blank" rel="noopener noreferrer">Get early access</ButtonLink>
         }
       />
 
       <Main>
-        <FocusEmailOnHash formId="hero" inputSelector="#email-signup input[type='email']" />
         {/* Hero */}
         {/* Hidden: logo grid footer prop
         <LogoGrid>
@@ -82,30 +79,66 @@ export default function Page() {
           </Logo>
         </LogoGrid>
         */}
-        <HeroWithDemoOnBackground
+        <HeroLeftAlignedWithDemo
           id="hero"
-          eyebrow={
-            <AnnouncementBadge href="#hero" text="Free during early access. Limited spots available." variant="overlay" />
-          }
-          headline="Find local businesses that need exactly what you sell."
+          eyebrow={<AnnouncementBadge href="#hero" text="‼️ Free during early access, 3 spots left" />}
+          headline="The first revenue engine for marketing agencies"
           subheadline={
             <p>
-              Yuzuu searches Google Maps, scores every lead against your offer, and tells you exactly who to contact and what to say.
+              Yuzuu finds relevant local businesses, scores each lead against your offer, and tells you exactly who to contact and what to say. You run outbound campaigns on autopilot and manage pipelines in one place.
             </p>
           }
           cta={
-            <EmailSignupForm
-              id="email-signup"
-              className="max-w-full"
-              variant="overlay"
-              cta={
-                <>
-                  Get early access <ArrowNarrowRightIcon />
-                </>
-              }
-            />
+            <div className="flex items-center gap-4">
+              <ButtonLink href="https://calendly.com/yuzuu/early-access" target="_blank" rel="noopener noreferrer" size="lg">
+                Get early access
+              </ButtonLink>
+            </div>
           }
-          demo={<img src="/img/screenshots/1.png" alt="" className="w-full" />}
+          demo={
+            <>
+              <Screenshot className="rounded-md lg:hidden" wallpaper="blue" placement="bottom-right">
+                <img
+                  src="/img/screenshots/1.png"
+                  alt=""
+                  width={1670}
+                  height={1408}
+                  className="bg-white/75 md:hidden dark:hidden"
+                />
+                <img
+                  src="/img/screenshots/1.png"
+                  alt=""
+                  width={1670}
+                  height={1408}
+                  className="bg-black/75 not-dark:hidden md:hidden"
+                />
+                <img
+                  src="/img/screenshots/1.png"
+                  alt=""
+                  width={2000}
+                  height={1408}
+                  className="bg-white/75 max-md:hidden dark:hidden"
+                />
+                <img
+                  src="/img/screenshots/1.png"
+                  alt=""
+                  width={2000}
+                  height={1408}
+                  className="bg-black/75 not-dark:hidden max-md:hidden"
+                />
+              </Screenshot>
+              <Screenshot className="rounded-lg max-lg:hidden" wallpaper="blue" placement="bottom">
+                <img src="/img/screenshots/1.png" alt="" className="bg-white/75 dark:hidden" width={3440} height={1990} />
+                <img
+                  className="bg-black/75 not-dark:hidden"
+                  src="/img/screenshots/1.png"
+                  alt=""
+                  width={3440}
+                  height={1990}
+                />
+              </Screenshot>
+            </>
+          }
         />
 
         <ProblemPainPoints
@@ -113,13 +146,13 @@ export default function Page() {
           eyebrow="The problem"
           headline={
             <>
-              Prospecting local businesses is painfully manual today.
+              Finding new customers for your agency is painfully time-consuming today
             </>
           }
           subheadline={
             <p>
-              Building a qualified list of local prospects still means living in Google Maps and spreadsheets — with
-              almost no signal on who actually needs what you sell before you reach out.
+              Building a qualified list of local prospects still means living in Google Maps and spreadsheets, with
+              almost no signal on who actually needs what you sell before you reach out. 
             </p>
           }
           quote={
@@ -129,7 +162,7 @@ export default function Page() {
               hour.
             </p>
           }
-          quoteAttribution="— Agency owner, selling local SEO for 3 years"
+          quoteAttribution="Any agency owner, selling local SEO for X years, struggling to get new clients"
         >
           <ProblemPainCard
             icon={<ClockIcon className="size-5" />}
@@ -139,7 +172,7 @@ export default function Page() {
           <ProblemPainCard
             icon={<TargetIcon className="size-5" />}
             headline="No way to prioritise the list"
-            description="Google Maps gives you a raw dump of pins — not a ranked queue of who to call first based on your offer."
+            description="You scrape Google Maps, it gives you a raw dump of pins, not a ranked queue of who to call first based on your offer."
           />
           <ProblemPainCard
             icon={<MailIcon className="size-5" />}
@@ -149,22 +182,23 @@ export default function Page() {
           <ProblemPainCard
             icon={<RepeatIcon className="size-5" />}
             headline="No repeatable process"
-            description="Every rep does it differently — different tabs, notes, spreadsheets — so quality varies and nothing scales."
+            description="Every rep does it differently: different tabs, notes, spreadsheets, so quality varies and nothing scales."
           />
         </ProblemPainPoints>
 
         {/* Features */}
         <Features
           id="features"
-          headline="A prospecting tool that understands your offer and finds who actually needs it."
+          eyebrow="Prospecting infrastructure built for busy agencies"
+          headline="Grow your revenue faster, all in one place"
           subheadline={
             <p>
-              Stop guessing who needs what you sell. Let Yuzuu do the research. You receive a list of businesses that are a good fit for your offer.
+              Yuzuu agents automate demand gen, pipeline management, and follow-ups so you can spend your time with customers.
             </p>
           }
           cta={
-            <Link href="#">
-              See how it works <ArrowNarrowRightIcon />
+            <Link href="https://calendly.com/yuzuu/early-access" target="_blank" rel="noopener noreferrer">
+              Show me how it works <ArrowNarrowRightIcon />
             </Link>
           }
           features={
@@ -173,62 +207,31 @@ export default function Page() {
                 demo={
                   <Screenshot wallpaper="blue" placement="bottom-right">
                     <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?left=1200&top=736"
-                      alt=""
-                      className="bg-white/75 sm:hidden dark:hidden"
+                      src="/img/leads-counter.gif"
+                      alt="Animated counter showing leads increasing"
+                      className="w-full bg-white/75 dark:bg-white/10"
                       width={1200}
-                      height={736}
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?left=1200&top=736&color=olive"
-                      alt=""
-                      width={1200}
-                      height={736}
-                      className="bg-black/75 not-dark:hidden sm:hidden"
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?left=1800&top=736"
-                      alt=""
-                      className="bg-white/75 max-sm:hidden lg:hidden dark:hidden"
-                      width={1800}
-                      height={736}
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?left=1800&top=736&color=olive"
-                      alt=""
-                      width={1800}
-                      height={736}
-                      className="bg-black/75 not-dark:hidden max-sm:hidden lg:hidden"
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?left=1200&top=736"
-                      alt=""
-                      className="bg-white/75 max-lg:hidden dark:hidden"
-                      width={1200}
-                      height={736}
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?left=1200&top=736&color=olive"
-                      alt=""
-                      width={1200}
-                      height={736}
-                      className="bg-black/75 not-dark:hidden max-lg:hidden"
+                      height={675}
+                      loading="lazy"
                     />
                   </Screenshot>
                 }
                 headline={
                   <>
-                    <span className="mb-2 block text-sm font-semibold tabular-nums text-olive-500 dark:text-olive-400">
+                    <span className="mb-2 block text-sm font-semibold tabular-nums text-mist-500 dark:text-mist-400">
                       01
                     </span>
-                    Tell us what you sell and where you&apos;re looking
+                    Leads keep flowing in—not only when someone squeezes in prospecting time
                   </>
                 }
                 subheadline={
                   <>
-                    <p>Enter a business category, a city, and describe your offer.</p>
-                    <p className="pt-1 text-xs font-semibold tracking-wide text-olive-600 dark:text-olive-400">
-                      1-min setup
+                    <p>
+                      Your scored queue stays fed from Google Maps so there&apos;s always the next batch of local
+                      businesses to review—without another manual scrape or spreadsheet marathon.
+                    </p>
+                    <p className="pt-1 text-xs font-semibold tracking-wide text-mist-600 dark:text-mist-400">
+                      Always-on lead intake
                     </p>
                   </>
                 }
@@ -237,65 +240,31 @@ export default function Page() {
                 demo={
                   <Screenshot wallpaper="purple" placement="top-left">
                     <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1200&bottom=736"
-                      alt=""
-                      className="bg-white/75 sm:hidden dark:hidden"
+                      src="/img/meetings-counter.gif"
+                      alt="Animated counter showing meetings booked"
+                      className="w-full bg-white/75 dark:bg-white/10"
                       width={1200}
-                      height={736}
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1200&bottom=736&color=olive"
-                      alt=""
-                      width={1200}
-                      height={736}
-                      className="bg-black/75 not-dark:hidden sm:hidden"
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1800&bottom=736"
-                      alt=""
-                      className="bg-white/75 max-sm:hidden lg:hidden dark:hidden"
-                      width={1800}
-                      height={736}
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1800&bottom=736&color=olive"
-                      alt=""
-                      width={1800}
-                      height={736}
-                      className="bg-black/75 not-dark:hidden max-sm:hidden lg:hidden"
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1200&bottom=736"
-                      alt=""
-                      className="bg-white/75 max-lg:hidden dark:hidden"
-                      width={1200}
-                      height={736}
-                    />
-                    <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1200&bottom=736&color=olive"
-                      alt=""
-                      width={1200}
-                      height={736}
-                      className="bg-black/75 not-dark:hidden max-lg:hidden"
+                      height={675}
+                      loading="lazy"
                     />
                   </Screenshot>
                 }
                 headline={
                   <>
-                    <span className="mb-2 block text-sm font-semibold tabular-nums text-olive-500 dark:text-olive-400">
+                    <span className="mb-2 block text-sm font-semibold tabular-nums text-mist-500 dark:text-mist-400">
                       02
                     </span>
-                    Get a scored list of local businesses instantly
+                    Meetings booked on autopilot—not endless scheduling ping-pong
                   </>
                 }
                 subheadline={
                   <>
                     <p>
-                      Yuzuu pulls local businesses from Google Maps and computes a surface score for each one based on
-                      rating, review count, website presence, and fit with your offer. Browse, filter, sort.
+                      Outreach runs on rails: drafts, reminders, and hand-offs so interested prospects land on your
+                      calendar while you stay focused on the conversations that close deals.
                     </p>
-                    <p className="pt-1 text-xs font-semibold tracking-wide text-olive-600 dark:text-olive-400">
-                      seconds
+                    <p className="pt-1 text-xs font-semibold tracking-wide text-mist-600 dark:text-mist-400">
+                      Calendar fills in the background
                     </p>
                   </>
                 }
@@ -311,7 +280,7 @@ export default function Page() {
                       height={736}
                     />
                     <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1200&top=736&color=olive"
+                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1200&top=736&color=mist"
                       alt=""
                       width={1200}
                       height={736}
@@ -325,7 +294,7 @@ export default function Page() {
                       height={736}
                     />
                     <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1800&top=736&color=olive"
+                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1800&top=736&color=mist"
                       alt=""
                       className="bg-black/75 not-dark:hidden max-sm:hidden lg:hidden"
                       width={1800}
@@ -339,7 +308,7 @@ export default function Page() {
                       height={736}
                     />
                     <img
-                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1200&top=736&color=olive"
+                      src="https://assets.tailwindplus.com/screenshots/1.webp?right=1200&top=736&color=mist"
                       alt=""
                       className="bg-black/75 not-dark:hidden max-lg:hidden"
                       width={1200}
@@ -349,40 +318,41 @@ export default function Page() {
                 }
                 headline={
                   <>
-                    <span className="mb-2 block text-sm font-semibold tabular-nums text-olive-500 dark:text-olive-400">
+                    <span className="mb-2 block text-sm font-semibold tabular-nums text-mist-500 dark:text-mist-400">
                       03
                     </span>
-                    Enrich the leads that look promising, on demand.
+                    Pipeline management that grows deal value—not just tidy columns
                   </>
                 }
                 subheadline={
-                  <p>
-                    Click &quot;Enrich&quot; on any lead. Yuzuu scrapes their website, checks social presence, and
-                    analyses review sentiment. They enter your cold outreach process.
-                  </p>
+                  <>
+                    <p>
+                      Stages, owners, and next steps stay visible in one place so opportunities don&apos;t stall. Less
+                      guesswork means faster progression—and a pipeline total that reflects real upside.
+                    </p>
+                    <p className="pt-1 text-xs font-semibold tracking-wide text-mist-600 dark:text-mist-400">
+                      Compounding pipeline value
+                    </p>
+                  </>
                 }
               />
             </>
           }
         />
 
-        {/* Stats — hidden
         <StatsWithGraph
           id="stats"
-          eyebrow="Built for scale"
-          headline="The inbox powering customer conversations everywhere."
+          eyebrow="Time to value"
+          headline="Yuzuu starts working for you right away"
           subheadline={
             <p>
-              Yuzuu helps teams deliver personal, organized, and fast customer support across the world. From small
-              startups to enterprise teams, we process millions of messages each month — using a massive network of low
-              wage workers stationed around the globe.
+                Your start getting your first calls with businesses in a few days, not weeks.
             </p>
           }
         >
-          <Stat stat="2M+" text="Emails manually processed every week across thousands of teams." />
-          <Stat stat="99.98%" text="Uptime — because your customers never stop complaining." />
+          <Stat stat="Effortless onboarding" text="You get warm leads in seconds." />
+          <Stat stat="White-glove activation" text="People answer you, you close deals." />
         </StatsWithGraph>
-        */}
 
         {/* Testimonial — hidden
         <TestimonialLargeQuote
@@ -505,7 +475,7 @@ export default function Page() {
         <CallToActionSimple
           id="call-to-action"
           subheadlineFullWidth
-          headline="We're looking for 3 agencies to use Yuzuu for free"
+          headline="We're looking for 3 more agencies to use Yuzuu for free"
           subheadline={
             <>
               <p>
@@ -515,23 +485,23 @@ export default function Page() {
               </p>
               <ul className="space-y-2">
                 <li className="flex gap-4">
-                  <CheckmarkIcon className="h-lh shrink-0 stroke-olive-950 dark:stroke-white" />
-                  <p>Full access to all features: search, scoring, enrichment, email drafts</p>
+                  <CheckmarkIcon className="h-lh shrink-0 stroke-mist-950 dark:stroke-white" />
+                  <p>Full access to all features: search, scoring, enrichment, email drafts, pipeline management</p>
                 </li>
                 <li className="flex gap-4">
-                  <CheckmarkIcon className="h-lh shrink-0 stroke-olive-950 dark:stroke-white" />
+                  <CheckmarkIcon className="h-lh shrink-0 stroke-mist-950 dark:stroke-white" />
                   <p>Unlimited searches and enrichments for the duration of the trial</p>
                 </li>
                 <li className="flex gap-4">
-                  <CheckmarkIcon className="h-lh shrink-0 stroke-olive-950 dark:stroke-white" />
-                  <p>Direct line to the founder: you shape what gets built next</p>
+                  <CheckmarkIcon className="h-lh shrink-0 stroke-mist-950 dark:stroke-white" />
+                  <p>Direct line to the founder: YOU shape what gets built next</p>
                 </li>
                 <li className="flex gap-4">
-                  <CheckmarkIcon className="h-lh shrink-0 stroke-olive-950 dark:stroke-white" />
+                  <CheckmarkIcon className="h-lh shrink-0 stroke-mist-950 dark:stroke-white" />
                   <p>Locked-in early pricing when paid plans launch</p>
                 </li>
                 <li className="flex gap-4">
-                  <CheckmarkIcon className="h-lh shrink-0 stroke-olive-950 dark:stroke-white" />
+                  <CheckmarkIcon className="h-lh shrink-0 stroke-mist-950 dark:stroke-white" />
                   <p>No commitment, no credit card</p>
                 </li>
               </ul>
@@ -539,13 +509,10 @@ export default function Page() {
           }
           cta={
             <div className="flex items-center gap-4">
-              <ButtonLink href="#hero" size="lg">
+              <ButtonLink href="https://calendly.com/yuzuu/early-access" target="_blank" rel="noopener noreferrer" size="lg">
                Get early access
               </ButtonLink>
 
-              <PlainButtonLink href="https://calendly.com/not-another-marketer/free-ai-growth-audit-call" size="lg">
-                Book a demo <ChevronIcon />
-              </PlainButtonLink>
             </div>
           }
         />
@@ -559,7 +526,7 @@ export default function Page() {
             <XIcon />
           </SocialLink>
         }
-        fineprint="Made with 💚 in France © 2026 Yuzuu. All rights reserved."
+        fineprint="Made with 💚 from 🇫🇷 Paris © 2026 Yuzuu. All rights reserved."
       />
     </>
   )

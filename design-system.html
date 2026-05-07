@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yuzuu — Design system</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* Tokens — mist scale from Tailwind default theme (tailwindcss/theme.css); fonts from globals.css @theme */
+      :root {
+        --font-display: 'Instrument Serif', serif;
+        --font-sans: 'Inter', system-ui, sans-serif;
+
+        --color-mist-50: oklch(98.7% 0.002 197.1);
+        --color-mist-100: oklch(96.3% 0.002 197.1);
+        --color-mist-200: oklch(92.5% 0.005 214.3);
+        --color-mist-300: oklch(87.2% 0.007 219.6);
+        --color-mist-400: oklch(72.3% 0.014 214.4);
+        --color-mist-500: oklch(56% 0.021 213.5);
+        --color-mist-600: oklch(45% 0.017 213.2);
+        --color-mist-700: oklch(37.8% 0.015 216);
+        --color-mist-800: oklch(27.5% 0.011 216.9);
+        --color-mist-900: oklch(21.8% 0.008 223.9);
+        --color-mist-950: oklch(14.8% 0.004 228.8);
+
+        --radius-pill: 9999px;
+        --radius-card: 0.75rem;
+        --radius-icon: 0.5rem;
+
+        --scroll-padding-nav: 5.25rem;
+
+        color-scheme: light;
+        --bg-page: var(--color-mist-100);
+        --text-primary: var(--color-mist-950);
+        --text-muted: var(--color-mist-700);
+        --text-eyebrow: var(--color-mist-700);
+        --invert-bg: color-mix(in oklch, var(--color-mist-950) 10%, transparent);
+        --invert-ring: color-mix(in oklch, var(--color-mist-950) 20%, transparent);
+        --card-bg: #fff;
+        --card-ring: color-mix(in oklch, var(--color-mist-950) 5%, transparent);
+        --section-muted-bg: var(--color-mist-50);
+      }
+
+      [data-theme='dark'] {
+        color-scheme: dark;
+        --bg-page: var(--color-mist-950);
+        --text-primary: #fff;
+        --text-muted: var(--color-mist-400);
+        --text-eyebrow: var(--color-mist-400);
+        --invert-bg: color-mix(in oklch, #fff 10%, transparent);
+        --invert-ring: color-mix(in oklch, #fff 10%, transparent);
+        --card-bg: color-mix(in oklch, #fff 5%, transparent);
+        --card-ring: color-mix(in oklch, #fff 10%, transparent);
+        --section-muted-bg: color-mix(in oklch, var(--color-mist-950) 50%, black);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        font-family: var(--font-sans);
+        background-color: var(--bg-page);
+        color: var(--text-primary);
+        scroll-padding-top: var(--scroll-padding-nav);
+      }
+
+      body {
+        margin: 0;
+        line-height: 1.5;
+      }
+
+      a {
+        color: inherit;
+      }
+
+      code,
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.9em;
+      }
+
+      /* Doc chrome */
+      .doc-nav {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem 1.25rem;
+        padding: 0.75rem 1.5rem;
+        border-bottom: 1px solid var(--invert-ring);
+        background: color-mix(in oklch, var(--bg-page) 92%, transparent);
+        backdrop-filter: blur(10px);
+      }
+
+      .doc-nav a {
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        opacity: 0.85;
+      }
+
+      .doc-nav a:hover {
+        opacity: 1;
+      }
+
+      .theme-toggle {
+        margin-left: auto;
+        display: inline-flex;
+        gap: 0.35rem;
+      }
+
+      .theme-toggle button {
+        font: inherit;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.35rem 0.65rem;
+        border-radius: var(--radius-pill);
+        border: 1px solid var(--invert-ring);
+        background: var(--invert-bg);
+        color: var(--text-primary);
+        cursor: pointer;
+      }
+
+      .theme-toggle button[aria-pressed='true'] {
+        background: var(--text-primary);
+        color: var(--bg-page);
+        border-color: transparent;
+      }
+
+      .wrap {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 4rem;
+      }
+
+      @media (min-width: 1024px) {
+        .wrap {
+          padding-left: 2.5rem;
+          padding-right: 2.5rem;
+        }
+      }
+
+      h1.doc-title {
+        font-family: var(--font-display);
+        font-size: clamp(2.25rem, 4vw, 3rem);
+        letter-spacing: -0.02em;
+        margin: 0 0 0.5rem;
+        line-height: 1.15;
+      }
+
+      .doc-lede {
+        font-size: 1.125rem;
+        line-height: 1.75rem;
+        color: var(--text-muted);
+        max-width: 42rem;
+        margin: 0 0 2.5rem;
+      }
+
+      section.ds-section {
+        margin-bottom: 3.5rem;
+        scroll-margin-top: calc(var(--scroll-padding-nav) + 0.5rem);
+      }
+
+      section.ds-section > h2 {
+        font-family: var(--font-display);
+        font-size: 1.75rem;
+        letter-spacing: -0.02em;
+        margin: 0 0 1rem;
+      }
+
+      section.ds-section > p.section-intro {
+        color: var(--text-muted);
+        max-width: 48rem;
+        margin: 0 0 1.25rem;
+      }
+
+      .token-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+      }
+
+      .token-table th,
+      .token-table td {
+        text-align: left;
+        padding: 0.6rem 0.75rem;
+        border-bottom: 1px solid var(--invert-ring);
+        vertical-align: middle;
+      }
+
+      .token-table th {
+        font-weight: 600;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--text-muted);
+      }
+
+      .swatch {
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: var(--radius-icon);
+        border: 1px solid var(--invert-ring);
+        flex-shrink: 0;
+      }
+
+      .flex-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .demo-grid {
+        display: grid;
+        gap: 1rem;
+      }
+
+      @media (min-width: 640px) {
+        .demo-grid.cols-2 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      .demo-panel {
+        border-radius: var(--radius-card);
+        padding: 1.25rem 1.5rem;
+        border: 1px solid var(--card-ring);
+        background: var(--card-bg);
+      }
+
+      .demo-panel-label {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--text-muted);
+        margin-bottom: 1rem;
+      }
+
+      /* Patterns lifted from components/elements/* */
+      .ui-heading {
+        font-family: var(--font-display);
+        font-size: 3rem;
+        line-height: 3rem;
+        letter-spacing: -0.02em;
+        text-wrap: balance;
+        color: var(--text-primary);
+      }
+
+      @media (min-width: 640px) {
+        .ui-heading {
+          font-size: 5rem;
+          line-height: 5rem;
+        }
+      }
+
+      .ui-subheading {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        line-height: 2.5rem;
+        letter-spacing: -0.02em;
+        text-wrap: pretty;
+        color: var(--text-primary);
+      }
+
+      @media (min-width: 640px) {
+        .ui-subheading {
+          font-size: 3rem;
+          line-height: 3.5rem;
+        }
+      }
+
+      .ui-eyebrow {
+        font-size: 0.875rem;
+        line-height: 1.75rem;
+        font-weight: 600;
+        color: var(--text-eyebrow);
+      }
+
+      .ui-eyebrow.alt {
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--color-mist-600);
+      }
+
+      [data-theme='dark'] .ui-eyebrow.alt {
+        color: var(--color-mist-400);
+      }
+
+      .ui-text {
+        font-size: 1rem;
+        line-height: 1.75rem;
+        color: var(--text-muted);
+      }
+
+      .ui-text.lg {
+        font-size: 1.125rem;
+        line-height: 2rem;
+      }
+
+      .ui-card-title {
+        font-size: 1rem;
+        line-height: 2rem;
+        font-weight: 600;
+        color: var(--text-primary);
+      }
+
+      .ui-quote {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        font-style: italic;
+        letter-spacing: -0.02em;
+        text-wrap: pretty;
+        color: var(--text-primary);
+      }
+
+      @media (min-width: 640px) {
+        .ui-quote {
+          font-size: 1.5rem;
+          line-height: 2.5rem;
+        }
+      }
+
+      .ui-caption {
+        margin-top: 1.5rem;
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        color: var(--text-muted);
+      }
+
+      /* Buttons — components/elements/button.tsx */
+      .btn {
+        display: inline-flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        border-radius: var(--radius-pill);
+        font-size: 0.875rem;
+        line-height: 1.75rem;
+        font-weight: 500;
+        border: none;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .btn-md {
+        padding: 0.25rem 0.75rem;
+      }
+
+      .btn-lg {
+        padding: 0.5rem 1rem;
+      }
+
+      .btn-solid {
+        background: var(--color-mist-950);
+        color: #fff;
+      }
+
+      .btn-solid:hover {
+        background: var(--color-mist-800);
+      }
+
+      [data-theme='dark'] .btn-solid {
+        background: var(--color-mist-300);
+        color: var(--color-mist-950);
+      }
+
+      [data-theme='dark'] .btn-solid:hover {
+        background: var(--color-mist-200);
+      }
+
+      .btn-light {
+        background: #fff;
+        color: var(--color-mist-950);
+      }
+
+      .btn-light:hover {
+        background: var(--color-mist-100);
+      }
+
+      [data-theme='dark'] .btn-light {
+        background: var(--color-mist-100);
+      }
+
+      [data-theme='dark'] .btn-light:hover {
+        background: #fff;
+      }
+
+      .btn-soft {
+        background: color-mix(in oklch, var(--color-mist-950) 10%, transparent);
+        color: var(--color-mist-950);
+      }
+
+      .btn-soft:hover {
+        background: color-mix(in oklch, var(--color-mist-950) 15%, transparent);
+      }
+
+      [data-theme='dark'] .btn-soft {
+        background: color-mix(in oklch, #fff 10%, transparent);
+        color: #fff;
+      }
+
+      [data-theme='dark'] .btn-soft:hover {
+        background: color-mix(in oklch, #fff 20%, transparent);
+      }
+
+      .btn-plain {
+        background: transparent;
+        color: var(--text-primary);
+      }
+
+      .btn-plain:hover {
+        background: color-mix(in oklch, var(--color-mist-950) 10%, transparent);
+      }
+
+      [data-theme='dark'] .btn-plain:hover {
+        background: color-mix(in oklch, #fff 10%, transparent);
+      }
+
+      .btn-icon-nav {
+        display: inline-flex;
+        border-radius: var(--radius-pill);
+        padding: 0.375rem;
+        color: var(--text-primary);
+        background: transparent;
+        border: none;
+        cursor: pointer;
+      }
+
+      .btn-icon-nav:hover {
+        background: color-mix(in oklch, var(--color-mist-950) 10%, transparent);
+      }
+
+      [data-theme='dark'] .btn-icon-nav:hover {
+        background: color-mix(in oklch, #fff 10%, transparent);
+      }
+
+      /* Inline link — components/elements/link.tsx */
+      .ui-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.875rem;
+        line-height: 1.75rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+
+      /* Navbar link rhythm — large on mobile in reference component */
+      .nav-link-ref {
+        font-size: 1.875rem;
+        line-height: 2.5rem;
+        font-weight: 500;
+        color: var(--text-primary);
+        text-decoration: none;
+      }
+
+      @media (min-width: 1024px) {
+        .nav-link-ref {
+          font-size: 0.875rem;
+          line-height: 1.75rem;
+        }
+      }
+
+      /* Announcement badge — components/elements/announcement-badge.tsx */
+      .badge {
+        display: inline-flex;
+        max-width: 100%;
+        gap: 0.75rem;
+        overflow: hidden;
+        border-radius: var(--radius-pill);
+        padding: 0.125rem 0.75rem;
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        align-items: center;
+        background: color-mix(in oklch, var(--color-mist-950) 5%, transparent);
+        color: var(--color-mist-950);
+      }
+
+      [data-theme='dark'] .badge {
+        background: color-mix(in oklch, #fff 5%, transparent);
+        color: #fff;
+        box-shadow: inset 0 0 0 1px color-mix(in oklch, #fff 5%, transparent);
+      }
+
+      /* Email signup shell — components/elements/email-signup-form.tsx */
+      .signup-form {
+        display: flex;
+        border-radius: var(--radius-pill);
+        padding: 0.25rem;
+        box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--color-mist-950) 10%, transparent);
+        background: #fff;
+      }
+
+      [data-theme='dark'] .signup-form {
+        background: color-mix(in oklch, #fff 10%, transparent);
+        box-shadow: inset 0 0 0 1px color-mix(in oklch, #fff 10%, transparent);
+      }
+
+      .signup-form input {
+        min-width: 0;
+        flex: 1;
+        padding: 0 0.75rem;
+        font-size: 0.875rem;
+        line-height: 1.75rem;
+        border: none;
+        background: transparent;
+        color: var(--color-mist-950);
+        outline: none;
+      }
+
+      [data-theme='dark'] .signup-form input {
+        color: #fff;
+      }
+
+      /* Cards — problem-pain-points.tsx pattern */
+      .card {
+        display: flex;
+        flex-direction: column;
+        border-radius: var(--radius-card);
+        padding: 1.5rem;
+        background: var(--card-bg);
+        box-shadow: 0 0 0 1px var(--card-ring);
+      }
+
+      .card-icon-wrap {
+        display: flex;
+        width: 2.5rem;
+        height: 2.5rem;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--radius-icon);
+        background: color-mix(in oklch, var(--color-mist-950) 5%, transparent);
+        color: var(--text-primary);
+      }
+
+      [data-theme='dark'] .card-icon-wrap {
+        background: color-mix(in oklch, #fff 10%, transparent);
+      }
+
+      .card-body {
+        margin-top: 1rem;
+        font-size: 0.875rem;
+        line-height: 1.75rem;
+        color: var(--text-muted);
+      }
+
+      /* Footer strip — footer-with-links-and-social-icons.tsx */
+      .footer-strip {
+        border-radius: 0;
+        padding: 4rem 1.5rem;
+        text-align: center;
+        font-size: 0.875rem;
+        line-height: 1.75rem;
+        background: color-mix(in oklch, var(--color-mist-950) 2.5%, transparent);
+        color: var(--text-primary);
+      }
+
+      [data-theme='dark'] .footer-strip {
+        background: color-mix(in oklch, #fff 5%, transparent);
+      }
+
+      .footer-muted {
+        color: var(--color-mist-600);
+      }
+
+      [data-theme='dark'] .footer-muted {
+        color: var(--color-mist-500);
+      }
+
+      .snippet {
+        margin-top: 0.75rem;
+        padding: 0.75rem 1rem;
+        border-radius: var(--radius-icon);
+        background: color-mix(in oklch, var(--color-mist-950) 4%, transparent);
+        font-size: 0.75rem;
+        line-height: 1.5;
+        overflow-x: auto;
+        color: var(--text-muted);
+      }
+
+      [data-theme='dark'] .snippet {
+        background: color-mix(in oklch, #fff 6%, transparent);
+      }
+
+      .snippet strong {
+        color: var(--text-primary);
+        font-weight: 600;
+      }
+
+      .kbd {
+        display: inline-block;
+        padding: 0.1rem 0.35rem;
+        border-radius: 4px;
+        border: 1px solid var(--invert-ring);
+        font-size: 0.7rem;
+        font-weight: 600;
+      }
+
+      .layout-callout {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        padding: 1rem 1.25rem;
+        border-left: 3px solid var(--color-mist-400);
+        margin: 1rem 0;
+        background: color-mix(in oklch, var(--color-mist-400) 8%, transparent);
+      }
+
+      [data-theme='dark'] .layout-callout {
+        background: color-mix(in oklch, var(--color-mist-700) 25%, transparent);
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="doc-nav" aria-label="Design system">
+      <strong style="font-size: 0.875rem">Yuzuu UI</strong>
+      <a href="#tokens">Tokens</a>
+      <a href="#typography">Typography</a>
+      <a href="#layout">Layout</a>
+      <a href="#components">Components</a>
+      <div class="theme-toggle" role="group" aria-label="Theme">
+        <button type="button" id="btn-light" aria-pressed="true">Light</button>
+        <button type="button" id="btn-dark" aria-pressed="false">Dark</button>
+      </div>
+    </nav>
+
+    <div class="wrap">
+      <header>
+        <h1 class="doc-title">Design system</h1>
+        <p class="doc-lede">
+          This reference is derived from the site’s Tailwind v4 theme and shared UI elements (<code class="mono">globals.css</code>,
+          <code class="mono">components/elements/*</code>). Use it to stay aligned on color, type, spacing, and component
+          treatments across pages.
+        </p>
+      </header>
+
+      <section id="tokens" class="ds-section">
+        <h2>Design tokens</h2>
+        <p class="section-intro">
+          The palette is a single neutral “mist” scale defined in OKLCH. Semantic usage on the site pairs
+          <strong class="mono">mist-950</strong> / white for primary text, <strong class="mono">mist-700</strong> /
+          <strong class="mono">mist-400</strong> (dark mode) for secondary copy, and layered translucency for chips, rings,
+          and elevated surfaces.
+        </p>
+
+        <table class="token-table" aria-label="Mist color scale">
+          <thead>
+            <tr>
+              <th>Token</th>
+              <th>Sample</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code class="mono">mist-50</code></td>
+              <td><div class="swatch" style="background: var(--color-mist-50)"></div></td>
+              <td><code class="mono">oklch(98.7% 0.002 197.1)</code></td>
+            </tr>
+            <tr>
+              <td><code class="mono">mist-100</code></td>
+              <td><div class="swatch" style="background: var(--color-mist-100)"></div></td>
+              <td><code class="mono">oklch(96.3% 0.002 197.1)</code></td>
+            </tr>
+            <tr>
+              <td><code class="mono">mist-200</code></td>
+              <td><div class="swatch" style="background: var(--color-mist-200)"></div></td>
+              <td><code class="mono">oklch(92.5% 0.005 214.3)</code></td>
+            </tr>
+            <tr>
+              <td><code class="mono">mist-300</code></td>
+              <td><div class="swatch" style="background: var(--color-mist-300)"></div></td>
+              <td><code class="mono">oklch(87.2% 0.007 219.6)</code></td>
+            </tr>
+            <tr>
+              <td><code class="mono">mist-400</code></td>
+              <td><div class="swatch" style="background: var(--color-mist-400)"></div></td>
+              <td><code class="mono">oklch(72.3% 0.014 214.4)</code></td>
+            </tr>
+            <tr>
+              <td><code class="mono">mist-500</code></td>
+              <td><div class="swatch" style="background: var(--color-mist-500)"></div></td>
+              <td><code class="mono">oklch(56% 0.021 213.5)</code></td>
+            </tr>
+            <tr>
+              <td><code class="mono">mist-600</code></td>
+              <td><div class="swatch" style="background: var(--color-mist-600)"></div></td>
+              <td><code class="mono">oklch(45% 0.017 213.2)</code></td>
+            </tr>
+            <tr>
+              <td><code class="mono">mist-700</code></td>
+              <td><div class="swatch" style="background: var(--color-mist-700)"></div></td>
+              <td><code class="mono">oklch(37.8% 0.015 216)</code></td>
+            </tr>
+            <tr>
+              <td><code class="mono">mist-800</code></td>
+              <td><div class="swatch" style="background: var(--color-mist-800)"></div></td>
+              <td><code class="mono">oklch(27.5% 0.011 216.9)</code></td>
+            </tr>
+            <tr>
+              <td><code class="mono">mist-900</code></td>
+              <td><div class="swatch" style="background: var(--color-mist-900)"></div></td>
+              <td><code class="mono">oklch(21.8% 0.008 223.9)</code></td>
+            </tr>
+            <tr>
+              <td><code class="mono">mist-950</code></td>
+              <td><div class="swatch" style="background: var(--color-mist-950)"></div></td>
+              <td><code class="mono">oklch(14.8% 0.004 228.8)</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="layout-callout">
+          <strong>Fonts:</strong> Display headings use <span class="kbd">Instrument Serif</span> (<code class="mono">--font-display</code> /
+          Tailwind <code class="mono">font-display</code>). UI body and controls use <span class="kbd">Inter</span>
+          (<code class="mono">--font-sans</code>). Both load from Google Fonts in <code class="mono">src/app/layout.tsx</code>.
+        </div>
+
+        <div class="snippet">
+          <strong>Base layer:</strong> Page background is <code class="mono">bg-mist-100</code> (light) and
+          <code class="mono">dark:bg-mist-950</code>; <code class="mono">html</code> sets smooth scrolling and font smoothing in
+          <code class="mono">globals.css</code>.
+        </div>
+      </section>
+
+      <section id="typography" class="ds-section">
+        <h2>Typography</h2>
+        <p class="section-intro">
+          Hierarchy follows the primitives in <code class="mono">Heading</code>, <code class="mono">Subheading</code>,
+          <code class="mono">Eyebrow</code>, and <code class="mono">Text</code>. Sizes use Tailwind’s text / leading scales
+          (<code class="mono">text-sm/7</code>, <code class="mono">text-base/7</code>, <code class="mono">text-lg/8</code>, etc.).
+        </p>
+
+        <div class="demo-grid cols-2">
+          <div class="demo-panel">
+            <div class="demo-panel-label">Hero headline · Heading</div>
+            <div class="ui-heading">Find leads that fit your offer</div>
+            <div class="snippet">
+              <code class="mono"
+                >font-display text-5xl/12 tracking-tight text-balance sm:text-[5rem]/20 text-mist-950 dark:text-white</code
+              >
+            </div>
+          </div>
+          <div class="demo-panel">
+            <div class="demo-panel-label">Section title · Subheading</div>
+            <div class="ui-subheading">Less researching. More conversations.</div>
+            <div class="snippet">
+              <code class="mono"
+                >font-display text-[2rem]/10 tracking-tight text-pretty sm:text-5xl/14 text-mist-950 dark:text-white</code
+              >
+            </div>
+          </div>
+          <div class="demo-panel">
+            <div class="demo-panel-label">Eyebrow · Eyebrow</div>
+            <div class="ui-eyebrow">Problem</div>
+            <div class="ui-eyebrow alt" style="margin-top: 0.75rem">Pain points</div>
+            <div class="snippet">
+              Default: <code class="mono">text-sm/7 font-semibold text-mist-700 dark:text-mist-400</code><br />
+              Uppercase variant: <code class="mono">text-xs uppercase tracking-wider text-mist-600 dark:text-mist-400</code>
+            </div>
+          </div>
+          <div class="demo-panel">
+            <div class="demo-panel-label">Body · Text</div>
+            <div class="ui-text">Default paragraph rhythm for sections (<code class="mono">text-base/7</code>).</div>
+            <div class="ui-text lg" style="margin-top: 0.75rem">
+              Larger supporting copy under heroes (<code class="mono">text-lg/8</code>).
+            </div>
+            <div class="snippet">
+              Shared muted color: <code class="mono">text-mist-700 dark:text-mist-400</code>
+            </div>
+          </div>
+          <div class="demo-panel">
+            <div class="demo-panel-label">Card title · h3 pattern</div>
+            <div class="ui-card-title">Manual prospecting doesn’t scale</div>
+            <div class="snippet"><code class="mono">text-base/8 font-semibold text-mist-950 dark:text-white</code></div>
+          </div>
+          <div class="demo-panel">
+            <div class="demo-panel-label">Quote · figure blockquote</div>
+            <blockquote class="ui-quote">“We stopped guessing who to call first.”</blockquote>
+            <div class="ui-caption">Name, Role — Company</div>
+            <div class="snippet">
+              <code class="mono"
+                >font-display text-xl/9 italic tracking-tight sm:text-2xl/10 text-mist-950 dark:text-white</code
+              >
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="layout" class="ds-section">
+        <h2>Layout & spacing</h2>
+        <p class="section-intro">
+          Sections lean on consistent vertical rhythm and a shared content width. Navigation sets scroll offset via CSS
+          variables for anchored sections.
+        </p>
+
+        <div class="demo-panel">
+          <div class="demo-panel-label">Container · components/elements/container.tsx</div>
+          <ul class="ui-text" style="margin: 0; padding-left: 1.25rem">
+            <li><code class="mono">max-w-2xl</code> with <code class="mono">px-6</code> by default</li>
+            <li><code class="mono">md:max-w-3xl</code></li>
+            <li><code class="mono">lg:max-w-7xl lg:px-10</code></li>
+          </ul>
+          <div class="snippet">
+            <strong>Section shell:</strong> <code class="mono">py-16</code> default; alternating bands may use
+            <code class="mono">py-24</code> with <code class="mono">bg-mist-50 dark:bg-mist-950/50</code>. Inner stacks often
+            use <code class="mono">gap-10 sm:gap-16</code> between headline blocks and content.
+          </div>
+        </div>
+
+        <div class="demo-panel" style="margin-top: 1rem">
+          <div class="demo-panel-label">Navbar · sticky header pattern</div>
+          <p class="ui-text" style="margin-top: 0">
+            Sticky bar: <code class="mono">sticky top-0 z-10 bg-mist-100 dark:bg-mist-950</code>. Row height aligns with
+            <code class="mono">--scroll-padding-top: 5.25rem</code> for <code class="mono">scroll-padding-top</code> on
+            <code class="mono">html</code>.
+          </p>
+          <p class="ui-text"><a class="nav-link-ref" href="#">Example nav link sizing</a></p>
+          <div class="snippet">
+            Desktop link: <code class="mono">lg:text-sm/7</code> · Mobile sheet: <code class="mono">text-3xl/10</code>
+          </div>
+        </div>
+
+        <div class="layout-callout">
+          <strong>Main landmark:</strong> Page shell wraps content in <code class="mono">Main</code> with
+          <code class="mono">isolate overflow-clip</code> to contain stacking and clipping without affecting sticky behavior.
+        </div>
+      </section>
+
+      <section id="components" class="ds-section">
+        <h2>Components</h2>
+        <p class="section-intro">
+          Patterns below map directly to the React primitives under <code class="mono">components/elements</code>. Class names
+          are shown for Tailwind usage in JSX.
+        </p>
+
+        <div class="demo-grid cols-2">
+          <div class="demo-panel">
+            <div class="demo-panel-label">Primary actions · Button / ButtonLink</div>
+            <p style="margin: 0 0 0.75rem">
+              <button type="button" class="btn btn-md btn-solid">Solid md</button>
+              &nbsp;
+              <button type="button" class="btn btn-lg btn-solid">Solid lg</button>
+            </p>
+            <p style="margin: 0 0 0.75rem">
+              <button type="button" class="btn btn-md btn-light">Light</button>
+            </p>
+            <div class="snippet">
+              Solid: <code class="mono">rounded-full text-sm/7 font-medium bg-mist-950 text-white hover:bg-mist-800 … dark:bg-mist-300 dark:text-mist-950</code><br />
+              Padding scales: <code class="mono">md → px-3 py-1</code>, <code class="mono">lg → px-4 py-2</code>
+            </div>
+          </div>
+
+          <div class="demo-panel">
+            <div class="demo-panel-label">Quiet actions · SoftButton / PlainButton</div>
+            <p style="margin: 0 0 0.75rem">
+              <button type="button" class="btn btn-md btn-soft">Soft</button>
+              &nbsp;
+              <button type="button" class="btn btn-md btn-plain">Plain</button>
+              &nbsp;
+              <button type="button" class="btn-icon-nav" aria-label="Menu">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor"><path fill-rule="evenodd" d="M3.748 8.248a.75.75 0 0 1 .75-.75h15a.75.75 0 0 1 0 1.5h-15a.75.75 0 0 1-.75-.75Zm0 7.502a.75.75 0 0 1 .75-.751h15a.75.75 0 0 1 0 1.5h-15a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd"/></svg>
+              </button>
+            </p>
+            <div class="snippet">
+              Soft: <code class="mono">rounded-full bg-mist-950/10 … dark:bg-white/10</code><br />
+              Plain: <code class="mono">rounded-full text-mist-950 hover:bg-mist-950/10 … dark:hover:bg-white/10</code><br />
+              Icon ghost (nav): <code class="mono">rounded-full p-1.5 hover:bg-mist-950/10</code>
+            </div>
+          </div>
+
+          <div class="demo-panel">
+            <div class="demo-panel-label">Inline link · Link</div>
+            <a class="ui-link" href="#">See how scoring works →</a>
+            <div class="snippet"><code class="mono">inline-flex gap-2 text-sm/7 font-medium text-mist-950 dark:text-white</code></div>
+          </div>
+
+          <div class="demo-panel">
+            <div class="demo-panel-label">Announcement · AnnouncementBadge</div>
+            <span class="badge"><span>New: enrichment workflows</span></span>
+            <div class="snippet">
+              Normal chip:
+              <code class="mono">rounded-full sm:px-3 sm:py-0.5 bg-mist-950/5 text-mist-950 dark:bg-white/5 dark:text-white dark:inset-ring-1</code>
+            </div>
+          </div>
+
+          <div class="demo-panel">
+            <div class="demo-panel-label">Email capture · EmailSignupForm</div>
+            <form class="signup-form" aria-label="Demo signup">
+              <input type="email" placeholder="Enter your email" autocomplete="email" />
+              <button type="button" class="btn btn-md btn-solid">Join waitlist</button>
+            </form>
+            <div class="snippet">
+              Shell:
+              <code class="mono">flex rounded-full p-1 inset-ring-1 bg-white inset-ring-black/10 dark:bg-white/10</code>
+            </div>
+          </div>
+
+          <div class="demo-panel">
+            <div class="demo-panel-label">Elevated card · ProblemPainCard</div>
+            <div class="card">
+              <div class="card-icon-wrap" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z"/></svg>
+              </div>
+              <h3 class="ui-card-title" style="margin-top: 1rem">Spreadsheets and tabs</h3>
+              <p class="card-body">Research lives everywhere except where your team actually works.</p>
+            </div>
+            <div class="snippet">
+              Surface:
+              <code class="mono">rounded-xl bg-white p-6 ring-1 ring-mist-950/5 dark:bg-white/5 dark:ring-white/10</code>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-strip" style="margin-top: 2rem">
+          <nav aria-label="Footer demo">
+            <span class="ui-link" style="justify-content: center">Pricing</span>
+            ·
+            <span class="ui-link" style="justify-content: center">Privacy</span>
+          </nav>
+          <p class="footer-muted" style="margin-top: 1rem">© Yuzuu — footer fine print uses muted mist.</p>
+          <div class="snippet" style="margin-top: 1rem; text-align: left">
+            Strip: <code class="mono">bg-mist-950/2.5 py-16 text-sm/7 dark:bg-white/5</code> · Muted line:
+            <code class="mono">text-mist-600 dark:text-mist-500</code>
+          </div>
+        </div>
+      </section>
+
+      <footer class="ui-text" style="margin-top: 3rem; font-size: 0.8125rem">
+        Generated from this repo’s CSS and component tokens. For implementation, prefer importing primitives from
+        <code class="mono">components/elements</code> rather than copying raw markup.
+      </footer>
+    </div>
+
+    <script>
+      const root = document.documentElement
+      const btnLight = document.getElementById('btn-light')
+      const btnDark = document.getElementById('btn-dark')
+
+      function setTheme(mode) {
+        root.dataset.theme = mode
+        btnLight.setAttribute('aria-pressed', mode === 'light' ? 'true' : 'false')
+        btnDark.setAttribute('aria-pressed', mode === 'dark' ? 'true' : 'false')
+        try {
+          localStorage.setItem('yuzuu-design-system-theme', mode)
+        } catch (_) {}
+      }
+
+      btnLight.addEventListener('click', () => setTheme('light'))
+      btnDark.addEventListener('click', () => setTheme('dark'))
+
+      ;(function initTheme() {
+        try {
+          const saved = localStorage.getItem('yuzuu-design-system-theme')
+          if (saved === 'light' || saved === 'dark') {
+            setTheme(saved)
+            return
+          }
+        } catch (_) {}
+        setTheme(window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      })()
+    </script>
+  </body>
+</html>

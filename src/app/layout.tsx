@@ -3,22 +3,23 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: {
-    default: 'Yuzuu — Find local businesses that need what you sell',
+    default: 'The first revenue engine for marketing agencies',
     template: '%s · Yuzuu',
   },
   description:
-    'Yuzuu searches Google Maps, scores every lead against your offer, and surfaces who to contact and what to say—plus enrichment and outreach workflows built for agencies.',
+    'Find relevant local businesses, score leads against your offer, and know who to contact and what to say. Yuzuu automates demand gen, pipeline management, and follow-ups for marketing agencies—all in one workspace.',
   openGraph: {
-    title: 'Yuzuu — Find local businesses that need what you sell',
+    title: 'The first revenue engine for marketing agencies',
     description:
-      'Score and enrich local leads from Google Maps. Built for teams who prospect SMBs and want less manual research.',
+      'Prospecting infrastructure for busy agencies: scored local leads, enrichment, outbound on autopilot, and pipelines without living in Google Maps and spreadsheets.',
     type: 'website',
+    siteName: 'Yuzuu',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Yuzuu — Find local businesses that need what you sell',
+    title: 'The first revenue engine for marketing agencies',
     description:
-      'Score and enrich local leads from Google Maps. Built for teams who prospect SMBs and want less manual research.',
+      'Find and score local businesses against your offer. Agents automate demand gen, follow-ups, and pipeline management so your team sells—not researches.',
   },
 }
 
