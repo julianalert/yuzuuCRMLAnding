@@ -9,15 +9,17 @@ export function FeatureThreeColumnWithDemos({
   className,
   ...props
 }: {
-  demo: ReactNode
+  demo?: ReactNode
   headline: ReactNode
   subheadline: ReactNode
 } & ComponentProps<'div'>) {
   return (
     <div className={clsx('flex h-full flex-col rounded-lg bg-mist-950/2.5 p-2 dark:bg-white/5', className)} {...props}>
-      <div className="relative flex min-h-[210px] flex-1 flex-col items-center justify-center overflow-hidden rounded-sm dark:after:absolute dark:after:inset-0 dark:after:rounded-sm dark:after:outline-1 dark:after:-outline-offset-1 dark:after:outline-white/10">
-        {demo}
-      </div>
+      {demo != null ? (
+        <div className="relative flex min-h-[210px] flex-1 flex-col items-center justify-center overflow-hidden rounded-sm dark:after:absolute dark:after:inset-0 dark:after:rounded-sm dark:after:outline-1 dark:after:-outline-offset-1 dark:after:outline-white/10">
+          {demo}
+        </div>
+      ) : null}
       <div className="p-6 sm:p-10 lg:p-6">
         <h3 className="text-base/8 font-medium text-mist-950 dark:text-white">{headline}</h3>
         <div className="mt-2 flex flex-col gap-4 text-sm/7 text-mist-700 dark:text-mist-400">{subheadline}</div>

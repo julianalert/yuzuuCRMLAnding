@@ -1,52 +1,47 @@
 import { AnnouncementBadge } from '@/components/elements/announcement-badge'
-import { ButtonLink, PlainButtonLink, SoftButtonLink } from '@/components/elements/button'
 import { CalendlyEarlyAccessButtonLink, CalendlyHowItWorksLink } from '@/components/elements/calendly-tracking'
-import { Logo, LogoGrid } from '@/components/elements/logo-grid'
 import { Main } from '@/components/elements/main'
 import { FeatureStatCard } from '@/components/elements/feature-stat-card'
 import { HeroLeadCards } from '@/components/lead-cards/hero-lead-cards'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
-import { ChevronIcon } from '@/components/icons/chevron-icon'
 import { ClockIcon } from '@/components/icons/clock-icon'
 import { CheckmarkIcon } from '@/components/icons/checkmark-icon'
 import { MailIcon } from '@/components/icons/mail-icon'
 import { RepeatIcon } from '@/components/icons/repeat-icon'
 import { TargetIcon } from '@/components/icons/target-icon'
-import { GitHubIcon } from '@/components/icons/social/github-icon'
 import { XIcon } from '@/components/icons/social/x-icon'
-import { YouTubeIcon } from '@/components/icons/social/youtube-icon'
 import { CallToActionSimple } from '@/components/sections/call-to-action-simple'
 import { FAQsTwoColumnAccordion, Faq } from '@/components/sections/faqs-two-column-accordion'
 import { FeatureThreeColumnWithDemos, Features } from '@/components/sections/features-three-column-with-demos'
-import {
-  FooterLink,
-  FooterWithLinksAndSocialIcons,
-  SocialLink,
-} from '@/components/sections/footer-with-links-and-social-icons'
+import { FooterWithLinksAndSocialIcons, SocialLink } from '@/components/sections/footer-with-links-and-social-icons'
 import { HeroLeftAlignedWithDemo } from '@/components/sections/hero-left-aligned-with-demo'
 import {
   NavbarLink,
   NavbarLogo,
   NavbarWithLogoActionsAndCenteredLinks,
 } from '@/components/sections/navbar-with-logo-actions-and-centered-links'
-import { Plan, PricingMultiTier } from '@/components/sections/pricing-multi-tier'
 import { ProblemPainCard, ProblemPainPoints } from '@/components/sections/problem-pain-points'
 import { Stat, StatsWithGraph } from '@/components/sections/stats-with-graph'
-import { TestimonialLargeQuote } from '@/components/sections/testimonial-with-large-quote'
 
 export default function Page() {
   return (
     <>
       <NavbarWithLogoActionsAndCenteredLinks
         id="navbar"
-        links={<></>}
+        links={
+          <>
+            <NavbarLink href="#features">How it works?</NavbarLink>
+            <NavbarLink href="#faqs">FAQ</NavbarLink>
+            <NavbarLink href="#call-to-action">Get early access</NavbarLink>
+          </>
+        }
         logo={
-          <NavbarLogo href="#">
+          <NavbarLogo href="#hero">
             <span className="font-['Instrument_Serif'] text-2xl text-mist-950 dark:text-white">Yuzuu</span>
           </NavbarLogo>
         }
         actions={
-          <CalendlyEarlyAccessButtonLink>Get early access</CalendlyEarlyAccessButtonLink>
+          <CalendlyEarlyAccessButtonLink>Book a 15-min demo</CalendlyEarlyAccessButtonLink>
         }
       />
 
@@ -83,7 +78,13 @@ export default function Page() {
         <HeroLeftAlignedWithDemo
           id="hero"
           stackGapClassName="gap-16 lg:gap-20"
-          eyebrow={<AnnouncementBadge href="#hero" text="Free during early access, join now before it's too late" />}
+          eyebrow={
+            <AnnouncementBadge
+              href="#call-to-action"
+              text="free early access, no credit card · only 3 spots left"
+              cta="Get early access"
+            />
+          }
           headline="Find new customers for your marketing agency on autopilot"
           subheadline={
             <p>
@@ -91,8 +92,16 @@ export default function Page() {
             </p>
           }
           cta={
-            <div className="flex items-center gap-4">
-              <CalendlyEarlyAccessButtonLink size="lg">Get early access</CalendlyEarlyAccessButtonLink>
+            <div className="flex max-w-xl flex-col items-start gap-4 sm:flex-row sm:items-center">
+              <CalendlyEarlyAccessButtonLink
+                size="lg"
+                className="!bg-gradient-to-r !from-orange-500 !to-rose-500 !text-white !shadow-lg hover:!from-orange-600 hover:!to-rose-600"
+              >
+                Book a 15‑min demo
+              </CalendlyEarlyAccessButtonLink>
+              <p className="flex items-center gap-2 text-sm italic text-mist-700 dark:text-mist-400">
+                you'll be granted early access
+              </p>
             </div>
           }
           demo={<HeroLeadCards />}
@@ -119,7 +128,8 @@ export default function Page() {
               hour.
             </p>
           }
-          quoteAttribution="Any agency owner, selling local SEO for X years, struggling to get new clients"
+          quoteAttribution="Any agency owner, selling marketing services for years, struggling to get new clients
+"
         >
           <ProblemPainCard
             icon={<ClockIcon className="size-5" />}
@@ -154,15 +164,18 @@ export default function Page() {
             </p>
           }
           cta={
-            <CalendlyHowItWorksLink>
-              Show me how it works <ArrowNarrowRightIcon />
+            <CalendlyHowItWorksLink className="inline-flex items-center gap-2 text-sm/7 font-semibold transition-opacity hover:opacity-80">
+              <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent">
+                Book a 15‑min demo
+              </span>
+              <ArrowNarrowRightIcon className="shrink-0 text-rose-500" />
             </CalendlyHowItWorksLink>
           }
           features={
             <>
               <FeatureThreeColumnWithDemos
                 demo={
-                  <div className="flex w-full justify-center px-4 sm:px-6">
+                  <div className="flex w-full flex-col items-center gap-2 px-4 sm:px-6">
                     <FeatureStatCard
                       className="mx-auto w-full max-w-[min(30rem,100%)]"
                       emoji="🔥"
@@ -186,7 +199,7 @@ export default function Page() {
                   <>
                     <p>
                       Your scored queue stays fed from Google Maps so there&apos;s always the next batch of local
-                      businesses to review—without another manual scrape or spreadsheet marathon.
+                      businesses to review, without another manual scrape or spreadsheet marathon.
                     </p>
                     <p className="pt-1 text-xs font-semibold tracking-wide text-mist-600 dark:text-mist-400">
                       Always-on lead intake
@@ -196,7 +209,7 @@ export default function Page() {
               />
               <FeatureThreeColumnWithDemos
                 demo={
-                  <div className="flex w-full justify-center px-4 sm:px-6">
+                  <div className="flex w-full flex-col items-center gap-2 px-4 sm:px-6">
                     <FeatureStatCard
                       className="mx-auto w-full max-w-[min(30rem,100%)]"
                       emoji="📅"
@@ -230,7 +243,7 @@ export default function Page() {
               />
               <FeatureThreeColumnWithDemos
                 demo={
-                  <div className="flex w-full justify-center px-4 sm:px-6">
+                  <div className="flex w-full flex-col items-center gap-2 px-4 sm:px-6">
                     <FeatureStatCard
                       className="mx-auto w-full max-w-[min(30rem,100%)]"
                       emoji="📈"
@@ -247,14 +260,14 @@ export default function Page() {
                     <span className="mb-2 block text-sm font-semibold tabular-nums text-mist-500 dark:text-mist-400">
                       03
                     </span>
-                    Pipeline management that grows deal value—not just tidy columns
+                    Pipeline management that grows deal value, not just tidy columns
                   </>
                 }
                 subheadline={
                   <>
                     <p>
                       Stages, owners, and next steps stay visible in one place so opportunities don&apos;t stall. Less
-                      guesswork means faster progression—and a pipeline total that reflects real upside.
+                      guesswork means faster progression, and a pipeline total that reflects real upside.
                     </p>
                     <p className="pt-1 text-xs font-semibold tracking-wide text-mist-600 dark:text-mist-400">
                       Compounding pipeline value
@@ -272,7 +285,8 @@ export default function Page() {
           headline="Yuzuu starts working for you right away"
           subheadline={
             <p>
-                Your start getting your first calls with your ideal customers in a few days, not weeks. All while you focus on closing deals, not outbound prospecting.
+                You start getting your first calls with your ideal customers in a few days, not weeks, all while you
+                focus on closing deals, not outbound prospecting.
             </p>
           }
         >
@@ -280,55 +294,70 @@ export default function Page() {
           <Stat stat="White-glove activation" text="People answer you, you close deals." />
         </StatsWithGraph>
 
-        {/* Testimonial — hidden
-        <TestimonialLargeQuote
-          id="testimonial"
-          quote={
+        <FAQsTwoColumnAccordion
+          id="faqs"
+          headline="Common questions before you book"
+          subheadline={
             <p>
-              Yuzuu has completely transformed our customer support operations. The blend of AI efficiency and human
-              empathy has allowed us to provide exceptional service while significantly reducing costs.
+              Quick answers about the demo and pilot. If yours isn&apos;t here, grab a slot and we&apos;ll cover it on
+              the call.
             </p>
           }
-          img={
-            <img
-              src="https://assets.tailwindplus.com/avatars/10.webp?size=160"
-              alt=""
-              className="not-dark:bg-white/75 dark:bg-black/75"
-              width={160}
-              height={160}
-            />
-          }
-          name="Jordan Rogers"
-          byline="Founder at Anomaly"
-        />
-        */}
-
-        {/* FAQs — hidden
-        <FAQsTwoColumnAccordion id="faqs" headline="Questions & Answers">
+        >
           <Faq
             id="faq-1"
-            question="Do I need a credit card to start the free trial?"
-            answer="Yes, but don't worry, you won't be charged until the trial period is over. We won't send you an email reminding you when this happens because we are really hoping you'll forget and we can keep charging you until your cards expires"
+            question={<span>What happens on the 15‑minute call?</span>}
+            answer={
+              <p>
+                We align on what you sell and where you operate, walk through scored local leads tailored to your
+                offer, similar to what you saw above, and show how drafts and pipeline fit your team&apos;s workflow.
+              </p>
+            }
           />
           <Faq
             id="faq-2"
-            question="Can my whole team use the same inbox?"
-            answer="Yes, the more the merrier! Yuzuu works best when your entire company has access. We will charge you per additional seat, but we won't tell you about this until you get your invoice."
+            question={<span>Do I need a credit card to book?</span>}
+            answer={
+              <p>
+                No. Booking is just choosing a Calendly time. The pilot stays no-commitment until you explicitly move to
+                a paid tier later on.
+              </p>
+            }
           />
           <Faq
             id="faq-3"
-            question="Is the AI agent actually a bunch of people in India?"
-            answer="Not just India! We have people in lots of countries around the world pretending to be an AI, including some that are currently under sanctions, so we can't legally mention them here."
+            question={<span>Is Yuzuu only for the US, or only big cities?</span>}
+            answer={
+              <p>
+                It&apos;s built around Google Maps discovery, so geography depends on listings coverage for your
+                niche. Urban and suburban markets typically work best. On the demo we sanity-check whether your turf is a
+                good fit before you invest time.
+              </p>
+            }
           />
           <Faq
             id="faq-4"
-            question="Does Yuzuu replace my email client?"
-            answer="Absolutely. The idea is that we transition you away from email entirely, so you become completely dependent on our service. Like a parasite living off a host."
+            question={<span>What should I prepare?</span>}
+            answer={
+              <p>
+                A one-line pitch of what you sell, your ideal buyer (e.g. restaurants vs. gym vs. lawyers vs. etc.), and a region or
+                city you hunt in. Screenshots or a sample offer help but aren&apos;t required.
+              </p>
+            }
+          />
+          <Faq
+            id="faq-5"
+            question={<span>How is this different from a big B2B database?</span>}
+            answer={
+              <p>
+                Yuzuu is focused on local businesses surfaced from Maps-style data, ranked against your specific
+                packaging, not generic firmographics, so outbound starts with relevance instead of spraying huge lists.
+              </p>
+            }
           />
         </FAQsTwoColumnAccordion>
-        */}
 
-        {/* Pricing — hidden
+        {/* Pricing - hidden
         <PricingMultiTier
           id="pricing"
           headline="Pricing to fit your business needs."
@@ -435,8 +464,12 @@ export default function Page() {
           }
           cta={
             <div className="flex items-center gap-4">
-              <CalendlyEarlyAccessButtonLink size="lg">I want in, start building my pipeline for free</CalendlyEarlyAccessButtonLink>
-
+              <CalendlyEarlyAccessButtonLink
+                size="lg"
+                className="!bg-gradient-to-r !from-orange-500 !to-rose-500 !text-white !shadow-lg hover:!from-orange-600 hover:!to-rose-600"
+              >
+                Book a 15-min demo
+              </CalendlyEarlyAccessButtonLink>
             </div>
           }
         />
