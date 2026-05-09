@@ -3,7 +3,8 @@ import { ButtonLink, PlainButtonLink, SoftButtonLink } from '@/components/elemen
 import { CalendlyEarlyAccessButtonLink, CalendlyHowItWorksLink } from '@/components/elements/calendly-tracking'
 import { Logo, LogoGrid } from '@/components/elements/logo-grid'
 import { Main } from '@/components/elements/main'
-import { Screenshot } from '@/components/elements/screenshot'
+import { FeatureStatCard } from '@/components/elements/feature-stat-card'
+import { HeroLeadCards } from '@/components/lead-cards/hero-lead-cards'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
 import { ChevronIcon } from '@/components/icons/chevron-icon'
 import { ClockIcon } from '@/components/icons/clock-icon'
@@ -81,6 +82,7 @@ export default function Page() {
         */}
         <HeroLeftAlignedWithDemo
           id="hero"
+          stackGapClassName="gap-16 lg:gap-20"
           eyebrow={<AnnouncementBadge href="#hero" text="Free during early access, join now before it's too late" />}
           headline="Find new customers for your marketing agency on autopilot"
           subheadline={
@@ -93,50 +95,7 @@ export default function Page() {
               <CalendlyEarlyAccessButtonLink size="lg">Get early access</CalendlyEarlyAccessButtonLink>
             </div>
           }
-          demo={
-            <>
-              <Screenshot className="rounded-md lg:hidden" wallpaper="blue" placement="bottom-right">
-                <img
-                  src="/img/screenshots/1.png"
-                  alt=""
-                  width={1670}
-                  height={1408}
-                  className="bg-white/75 md:hidden dark:hidden"
-                />
-                <img
-                  src="/img/screenshots/1.png"
-                  alt=""
-                  width={1670}
-                  height={1408}
-                  className="bg-black/75 not-dark:hidden md:hidden"
-                />
-                <img
-                  src="/img/screenshots/1.png"
-                  alt=""
-                  width={2000}
-                  height={1408}
-                  className="bg-white/75 max-md:hidden dark:hidden"
-                />
-                <img
-                  src="/img/screenshots/1.png"
-                  alt=""
-                  width={2000}
-                  height={1408}
-                  className="bg-black/75 not-dark:hidden max-md:hidden"
-                />
-              </Screenshot>
-              <Screenshot className="rounded-lg max-lg:hidden" wallpaper="blue" placement="bottom">
-                <img src="/img/screenshots/1.png" alt="" className="bg-white/75 dark:hidden" width={3440} height={1990} />
-                <img
-                  className="bg-black/75 not-dark:hidden"
-                  src="/img/screenshots/1.png"
-                  alt=""
-                  width={3440}
-                  height={1990}
-                />
-              </Screenshot>
-            </>
-          }
+          demo={<HeroLeadCards />}
         />
 
         <ProblemPainPoints
@@ -203,23 +162,24 @@ export default function Page() {
             <>
               <FeatureThreeColumnWithDemos
                 demo={
-                  <Screenshot wallpaper="blue" placement="bottom-right">
-                    <img
-                      src="/img/leads-counter.gif"
-                      alt="Animated counter showing leads increasing"
-                      className="w-full bg-white/75 dark:bg-white/10"
-                      width={1200}
-                      height={675}
-                      loading="lazy"
+                  <div className="flex w-full justify-center px-4 sm:px-6">
+                    <FeatureStatCard
+                      className="mx-auto w-full max-w-[min(30rem,100%)]"
+                      emoji="🔥"
+                      label="Warm opportunities"
+                      value="350"
+                      caption="found this month"
+                      delta="+18%"
+                      period="May 2026"
                     />
-                  </Screenshot>
+                  </div>
                 }
                 headline={
                   <>
                     <span className="mb-2 block text-sm font-semibold tabular-nums text-mist-500 dark:text-mist-400">
                       01
                     </span>
-                    Leads keep flowing in—not only when someone squeezes in prospecting time
+                    Leads keep flowing in, not only when someone squeezes in prospecting time
                   </>
                 }
                 subheadline={
@@ -236,23 +196,24 @@ export default function Page() {
               />
               <FeatureThreeColumnWithDemos
                 demo={
-                  <Screenshot wallpaper="purple" placement="top-left">
-                    <img
-                      src="/img/meetings-counter.gif"
-                      alt="Animated counter showing meetings booked"
-                      className="w-full bg-white/75 dark:bg-white/10"
-                      width={1200}
-                      height={675}
-                      loading="lazy"
+                  <div className="flex w-full justify-center px-4 sm:px-6">
+                    <FeatureStatCard
+                      className="mx-auto w-full max-w-[min(30rem,100%)]"
+                      emoji="📅"
+                      label="Meetings booked"
+                      value="24"
+                      caption="scheduled this month"
+                      delta="+12%"
+                      period="May 2026"
                     />
-                  </Screenshot>
+                  </div>
                 }
                 headline={
                   <>
                     <span className="mb-2 block text-sm font-semibold tabular-nums text-mist-500 dark:text-mist-400">
                       02
                     </span>
-                    Meetings booked on autopilot—not endless scheduling ping-pong
+                    Meetings booked on autopilot, not endless scheduling ping-pong
                   </>
                 }
                 subheadline={
@@ -269,16 +230,17 @@ export default function Page() {
               />
               <FeatureThreeColumnWithDemos
                 demo={
-                  <Screenshot wallpaper="brown" placement="bottom-left">
-                    <img
-                      src="/img/pipeline-counter.gif"
-                      alt="Animated counter showing pipeline value growing"
-                      className="w-full bg-white/75 dark:bg-white/10"
-                      width={1200}
-                      height={675}
-                      loading="lazy"
+                  <div className="flex w-full justify-center px-4 sm:px-6">
+                    <FeatureStatCard
+                      className="mx-auto w-full max-w-[min(30rem,100%)]"
+                      emoji="📈"
+                      label="Pipeline value"
+                      value="$67,204"
+                      caption="in qualified stages"
+                      delta="+24%"
+                      period="May 2026"
                     />
-                  </Screenshot>
+                  </div>
                 }
                 headline={
                   <>
@@ -314,7 +276,7 @@ export default function Page() {
             </p>
           }
         >
-          <Stat stat="Effortless onboarding" text="You get warm leads in seconds." />
+          <Stat stat="Effortless onboarding" text="You get warm opportunities in seconds." />
           <Stat stat="White-glove activation" text="People answer you, you close deals." />
         </StatsWithGraph>
 
@@ -488,7 +450,7 @@ export default function Page() {
             <XIcon />
           </SocialLink>
         }
-        fineprint="Made with 💚 from 🇫🇷 Paris © 2026 Yuzuu. All rights reserved."
+        fineprint="Made with 💚 from New York © 2026 Yuzuu. All rights reserved."
       />
     </>
   )

@@ -12,6 +12,7 @@ export function HeroLeftAlignedWithDemo({
   demo,
   footer,
   className,
+  stackGapClassName = 'gap-32',
   ...props
 }: {
   eyebrow?: ReactNode
@@ -20,11 +21,13 @@ export function HeroLeftAlignedWithDemo({
   cta?: ReactNode
   demo?: ReactNode
   footer?: ReactNode
+  /** Vertical gap between intro (headline + CTA) and demo; default matches Tailwind Plus spacing */
+  stackGapClassName?: string
 } & ComponentProps<'section'>) {
   return (
     <section className={clsx('py-16', className)} {...props}>
-      <Container className="flex flex-col gap-16">
-        <div className="flex flex-col gap-32">
+      <Container className="flex min-w-0 w-full flex-col gap-16">
+        <div className={clsx('flex min-w-0 w-full flex-col', stackGapClassName)}>
           <div className="flex flex-col items-start gap-6">
             {eyebrow}
             <Heading className="max-w-5xl">{headline}</Heading>
@@ -33,7 +36,7 @@ export function HeroLeftAlignedWithDemo({
             </Text>
             {cta}
           </div>
-          {demo}
+          {demo ? <div className="min-w-0 w-full">{demo}</div> : null}
         </div>
         {footer}
       </Container>

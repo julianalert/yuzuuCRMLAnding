@@ -14,8 +14,8 @@ export function FeatureThreeColumnWithDemos({
   subheadline: ReactNode
 } & ComponentProps<'div'>) {
   return (
-    <div className={clsx('rounded-lg bg-mist-950/2.5 p-2 dark:bg-white/5', className)} {...props}>
-      <div className="relative overflow-hidden rounded-sm dark:after:absolute dark:after:inset-0 dark:after:rounded-sm dark:after:outline-1 dark:after:-outline-offset-1 dark:after:outline-white/10">
+    <div className={clsx('flex h-full flex-col rounded-lg bg-mist-950/2.5 p-2 dark:bg-white/5', className)} {...props}>
+      <div className="relative flex min-h-[210px] flex-1 flex-col items-center justify-center overflow-hidden rounded-sm dark:after:absolute dark:after:inset-0 dark:after:rounded-sm dark:after:outline-1 dark:after:-outline-offset-1 dark:after:outline-white/10">
         {demo}
       </div>
       <div className="p-6 sm:p-10 lg:p-6">
@@ -32,7 +32,7 @@ export function Features({
 }: { features: ReactNode } & Omit<ComponentProps<typeof Section>, 'children'>) {
   return (
     <Section {...props}>
-      <div className="grid grid-cols-1 gap-2 lg:grid-cols-3">{features}</div>
+      <div className="grid grid-cols-1 gap-2 lg:grid-cols-3 lg:items-stretch">{features}</div>
     </Section>
   )
 }
