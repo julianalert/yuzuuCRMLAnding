@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 
-import { Subheading } from '@/components/elements/subheading'
 import { LeadCardV2 } from '@/components/lead-cards/lead-card-v2'
 
 const cards = [
@@ -238,19 +237,7 @@ export function HeroLeadCards() {
   }, [])
 
   return (
-    <div ref={sectionRef} className="hero-lead-cards-outer flex flex-col gap-8">
-      <header className="flex max-w-3xl flex-col gap-3">
-        <p className="text-xs font-semibold uppercase tracking-wider bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent dark:from-orange-400 dark:to-rose-400">
-          Live Context
-        </p>
-        <Subheading>
-          This is what Yuzuu surfaced for a NYC-based social media agency last week
-        </Subheading>
-        <p className="text-base/7 text-mist-700 dark:text-mist-400">
-          Every card below is a real local business scored against a real agency offer. This is what lands in
-          your queue on day one.
-        </p>
-      </header>
+    <div ref={sectionRef} className="hero-lead-cards-outer">
       <div
         className="hero-lead-cards-slider"
         role="region"
