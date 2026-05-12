@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 import { AnnouncementBadge } from '@/components/elements/announcement-badge'
 import { CalendlyEarlyAccessButtonLink } from '@/components/elements/calendly-tracking'
 import { Main } from '@/components/elements/main'
@@ -41,7 +43,9 @@ export default function Page() {
           </NavbarLogo>
         }
         actions={
-          <CalendlyEarlyAccessButtonLink>Book a 15-min demo</CalendlyEarlyAccessButtonLink>
+          <CalendlyEarlyAccessButtonLink href="#call-to-action" target="_self">
+            Get early access
+          </CalendlyEarlyAccessButtonLink>
         }
       />
 
@@ -81,11 +85,11 @@ export default function Page() {
           eyebrow={
             <AnnouncementBadge
               href="#call-to-action"
-              text="free early access, no credit card · only 3 spots left"
-              cta="Book a 15-min demo"
+              text="free early access, no credit card · 1 out of 3 spots left"
+              cta="Get early access"
             />
           }
-          headline="Stop prospecting. Show up to call. Close deals."
+          headline="Stop prospecting. Show up to calls. Close deals."
           subheadline={
             <p>
               Tell Yuzuu what you sell and where. It fills your agency pipeline with scored, local leads. You only show up to the calls.
@@ -94,10 +98,12 @@ export default function Page() {
           cta={
             <div className="flex max-w-xl flex-col items-start gap-4 sm:flex-row sm:items-center">
               <CalendlyEarlyAccessButtonLink
+                href="#call-to-action"
+                target="_self"
                 size="lg"
                 className="!bg-gradient-to-r !from-orange-500 !to-rose-500 !text-white !shadow-lg hover:!from-orange-600 hover:!to-rose-600"
               >
-                Book a 15‑min demo
+                Get early access
               </CalendlyEarlyAccessButtonLink>
               <p className="flex items-center gap-2 text-sm italic text-mist-700 dark:text-mist-400">
                 you'll be granted early access
@@ -128,8 +134,31 @@ export default function Page() {
               hour.
             </p>
           }
-          quoteAttribution="Any agency owner, selling marketing services for years, struggling to get new clients
-"
+          quoteAttribution={
+            <span className="flex items-center gap-4">
+              <Image
+                src="/img/clementb.jpeg"
+                alt="Clément Bernard"
+                width={56}
+                height={56}
+                className="size-14 shrink-0 rounded-full object-cover ring-1 ring-mist-950/10 dark:ring-white/10"
+              />
+              <span className="text-pretty">
+                <a
+                  href="https://www.linkedin.com/in/clementbernard-/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="font-medium text-mist-950 underline decoration-mist-950/25 underline-offset-2 hover:decoration-mist-950/50 dark:text-white dark:decoration-white/25 dark:hover:decoration-white/50"
+                >
+                  Clément Bernard
+                </a>
+                <span className="font-normal">
+                  {' '}
+                  — Local SEO Marketing Agency Owner
+                </span>
+              </span>
+            </span>
+          }
         >
           <ProblemPainCard
             icon={<ClockIcon className="size-5" />}
@@ -169,10 +198,12 @@ export default function Page() {
           }
           cta={
             <CalendlyEarlyAccessButtonLink
+              href="#call-to-action"
+              target="_self"
               size="lg"
               className="!w-fit self-start inline-flex !items-center !gap-2 !bg-gradient-to-r !from-orange-500 !to-rose-500 !font-semibold !text-white !shadow-lg hover:!from-orange-600 hover:!to-rose-600"
             >
-              Book a 15‑min demo
+              Get early access
               <ArrowNarrowRightIcon className="size-3.5 shrink-0" aria-hidden />
             </CalendlyEarlyAccessButtonLink>
           }
@@ -294,9 +325,83 @@ export default function Page() {
           headline="Yuzuu starts working for you right away"
           subheadline={
             <p>
-                You start getting your first calls with your ideal customers in a few days, not weeks, all while you
-                focus on closing deals, not outbound prospecting.
+              You start getting your first calls with your ideal customers in a few days, not weeks, all while you
+              focus on closing deals, not outbound prospecting.
             </p>
+          }
+          belowChart={
+            <div className="w-full min-w-0">
+              <div className="grid w-full min-w-0 grid-cols-1 gap-4 md:grid-cols-2 md:gap-6">
+                <div className="flex min-w-0 flex-col overflow-hidden rounded-xl border border-mist-950/[0.07] bg-white dark:border-white/10 dark:bg-white/[0.05]">
+                  <div className="h-2 bg-gradient-to-r from-orange-500 to-rose-500 dark:from-orange-400 dark:to-rose-400" aria-hidden />
+                  <div className="flex min-w-0 flex-col p-6 sm:p-8">
+                    <h3 className="text-base font-semibold leading-snug text-mist-950 dark:text-white">
+                      Big B2B databases (Google Maps, Apollo, ZoomInfo)
+                    </h3>
+                    <ul className="mt-5 flex list-none flex-col gap-3 text-sm text-mist-700 dark:text-mist-400" role="list">
+                      <li className="flex min-w-0 items-start gap-[9px]">
+                        <span className="flex h-7 shrink-0 items-center" aria-hidden>
+                          <span className="size-1.5 rounded-full bg-mist-400 dark:bg-mist-500" />
+                        </span>
+                        <span className="min-w-0 flex-1 leading-7">Generic firmographic data</span>
+                      </li>
+                      <li className="flex min-w-0 items-start gap-[9px]">
+                        <span className="flex h-7 shrink-0 items-center" aria-hidden>
+                          <span className="size-1.5 rounded-full bg-mist-400 dark:bg-mist-500" />
+                        </span>
+                        <span className="min-w-0 flex-1 leading-7">Spray-and-pray lists of thousands</span>
+                      </li>
+                      <li className="flex min-w-0 items-start gap-[9px]">
+                        <span className="flex h-7 shrink-0 items-center" aria-hidden>
+                          <span className="size-1.5 rounded-full bg-mist-400 dark:bg-mist-500" />
+                        </span>
+                        <span className="min-w-0 flex-1 leading-7">No signal on why to reach out</span>
+                      </li>
+                      <li className="flex min-w-0 items-start gap-[9px]">
+                        <span className="flex h-7 shrink-0 items-center" aria-hidden>
+                          <span className="size-1.5 rounded-full bg-mist-400 dark:bg-mist-500" />
+                        </span>
+                        <span className="min-w-0 flex-1 leading-7">You write the pitch</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className="flex min-w-0 flex-col overflow-hidden rounded-xl border border-mist-950/[0.07] bg-white dark:border-white/10 dark:bg-white/[0.05]">
+                  <div className="h-2 bg-gradient-to-r from-emerald-500 to-green-600 dark:from-emerald-400 dark:to-green-500" aria-hidden />
+                  <div className="flex min-w-0 flex-col p-6 sm:p-8">
+                    <h3 className="text-base font-semibold leading-snug text-mist-950 dark:text-white">Yuzuu</h3>
+                    <ul className="mt-5 flex list-none flex-col gap-3 text-sm text-mist-950 dark:text-mist-200" role="list">
+                      <li className="flex min-w-0 items-start gap-[9px]">
+                        <span className="flex h-7 shrink-0 items-center" aria-hidden>
+                          <span className="size-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-green-600" />
+                        </span>
+                        <span className="min-w-0 flex-1 leading-7">Scored against your specific offer</span>
+                      </li>
+                      <li className="flex min-w-0 items-start gap-[9px]">
+                        <span className="flex h-7 shrink-0 items-center" aria-hidden>
+                          <span className="size-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-green-600" />
+                        </span>
+                        <span className="min-w-0 flex-1 leading-7">Curated queue of ready-to-pitch locals</span>
+                      </li>
+                      <li className="flex min-w-0 items-start gap-[9px]">
+                        <span className="flex h-7 shrink-0 items-center" aria-hidden>
+                          <span className="size-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-green-600" />
+                        </span>
+                        <span className="min-w-0 flex-1 leading-7">
+                          Intent signals: missing reviews, no booking, no website
+                        </span>
+                      </li>
+                      <li className="flex min-w-0 items-start gap-[9px]">
+                        <span className="flex h-7 shrink-0 items-center" aria-hidden>
+                          <span className="size-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-green-600" />
+                        </span>
+                        <span className="min-w-0 flex-1 leading-7">Draft is pre-written for you</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
           }
         >
           <Stat stat="Effortless onboarding" text="You get warm opportunities in seconds." />
@@ -477,7 +582,7 @@ export default function Page() {
                 size="lg"
                 className="!bg-gradient-to-r !from-orange-500 !to-rose-500 !text-white !shadow-lg hover:!from-orange-600 hover:!to-rose-600"
               >
-                Book a 15-min demo
+                Get early access
               </CalendlyEarlyAccessButtonLink>
             </div>
           }

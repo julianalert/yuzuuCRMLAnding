@@ -16,17 +16,22 @@ export function Stat({
   )
 }
 
-export function StatsWithGraph({ children, ...props }: ComponentProps<typeof Section>) {
+export function StatsWithGraph({
+  children,
+  belowChart,
+  ...props
+}: { belowChart?: ReactNode } & ComponentProps<typeof Section>) {
   let pathId = useId()
 
   return (
     <Section {...props}>
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-        <div className="col-span-2 grid grid-cols-2 gap-x-2 gap-y-10 sm:auto-cols-fr sm:grid-flow-col-dense">
-          {children}
+      <div className="flex w-full min-w-0 flex-col gap-10 sm:gap-12">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="col-span-2 grid grid-cols-2 gap-x-2 gap-y-10 sm:auto-cols-fr sm:grid-flow-col-dense">
+            {children}
+          </div>
         </div>
-      </div>
-      <div className="pointer-events-none relative h-48 sm:h-64 lg:h-36">
+        <div className="pointer-events-none relative h-48 sm:h-64 lg:h-36">
         <div className="absolute bottom-0 left-1/2 w-[150vw] max-w-[calc(var(--container-7xl)-(--spacing(10)*2))] -translate-x-1/2">
           <svg
             className="h-100 w-full fill-mist-950/2.5 stroke-mist-950/40 dark:fill-white/2.5 dark:stroke-white/40"
@@ -66,6 +71,8 @@ export function StatsWithGraph({ children, ...props }: ComponentProps<typeof Sec
             />
           </svg>
         </div>
+        </div>
+        {belowChart}
       </div>
     </Section>
   )

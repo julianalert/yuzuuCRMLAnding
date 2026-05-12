@@ -1,3 +1,8 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
+
+import { Subheading } from '@/components/elements/subheading'
 import { LeadCardV2 } from '@/components/lead-cards/lead-card-v2'
 
 const cards = [
@@ -153,6 +158,14 @@ const cards = [
   },
 ]
 
+const SCORE_TARGETS = cards.map((c) => c.score)
+const DURATION_MS = 1500
+const STAGGER_MS = 95
+
+function easeOutCubic(t: number) {
+  return 1 - (1 - t) ** 3
+}
+
 const trackStyle = {
   display: 'flex',
   flexDirection: 'row' as const,
@@ -169,13 +182,88 @@ const slideStyle = {
 }
 
 export function HeroLeadCards() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const startedRef = useRef(false)
+  const rafRef = useRef<number | null>(null)
+  /** null → use each card's static score; non-null → live count-up values */
+  const [displayScores, setDisplayScores] = useState<number[] | null>(null)
+
+  useEffect(() => {
+    const root = sectionRef.current
+    if (!root) return
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return
+    }
+
+    const startAnimation = () => {
+      if (startedRef.current) return
+      startedRef.current = true
+      const start = performance.now()
+
+      const tick = (now: number) => {
+        const elapsed = now - start
+        let complete = true
+        const next = SCORE_TARGETS.map((target, i) => {
+          const staggered = elapsed - i * STAGGER_MS
+          if (staggered <= 0) {
+            complete = false
+            return 0
+          }
+          const t = Math.min(1, staggered / DURATION_MS)
+          if (t < 1) complete = false
+          return Math.round(easeOutCubic(t) * target)
+        })
+        setDisplayScores(next)
+        if (!complete) {
+          rafRef.current = requestAnimationFrame(tick)
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(tick)
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) startAnimation()
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+    )
+
+    observer.observe(root)
+    return () => {
+      observer.disconnect()
+      if (rafRef.current != null) cancelAnimationFrame(rafRef.current)
+    }
+  }, [])
+
   return (
-    <div className="hero-lead-cards-outer">
-      <div className="hero-lead-cards-slider" role="region" aria-label="Example lead profiles">
+    <div ref={sectionRef} className="hero-lead-cards-outer flex flex-col gap-8">
+      <header className="flex max-w-3xl flex-col gap-3">
+        <p className="text-xs font-semibold uppercase tracking-wider bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent dark:from-orange-400 dark:to-rose-400">
+          Live Context
+        </p>
+        <Subheading>
+          This is what Yuzuu surfaced for a NYC-based social media agency last week
+        </Subheading>
+        <p className="text-base/7 text-mist-700 dark:text-mist-400">
+          Every card below is a real local business scored against a real agency offer. This is what lands in
+          your queue on day one.
+        </p>
+      </header>
+      <div
+        className="hero-lead-cards-slider"
+        role="region"
+        aria-label="Recent scored leads for a NYC social media agency"
+      >
         <div style={trackStyle}>
-          {cards.map((card) => (
+          {cards.map((card, i) => (
             <div key={card.ariaLabel} style={slideStyle}>
-              <LeadCardV2 {...card} className="h-full" />
+              <LeadCardV2
+                {...card}
+                displayScore={displayScores ? displayScores[i] : undefined}
+                className="h-full"
+              />
             </div>
           ))}
         </div>

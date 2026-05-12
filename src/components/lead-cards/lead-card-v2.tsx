@@ -11,6 +11,7 @@ export function LeadCardV2({
   name,
   locationLine,
   score,
+  displayScore,
   signals,
   quote,
   className,
@@ -19,10 +20,13 @@ export function LeadCardV2({
   name: string
   locationLine: string
   score: number
+  /** When set (e.g. during a count-up), overrides the numeric display while keeping semantic `score` for context */
+  displayScore?: number
   signals: LeadCardV2Signal[]
   quote: string
   className?: string
 }) {
+  const shownScore = displayScore ?? score
   return (
     <article
       className={clsx(
@@ -45,8 +49,11 @@ export function LeadCardV2({
             <p className="mt-0.5 text-xs text-mist-600 dark:text-mist-400">{locationLine}</p>
           </div>
           <div className="flex shrink-0 flex-col items-end gap-[5px]">
-            <div className="text-lg font-semibold tracking-[-0.02em] text-mist-950 dark:text-white">
-              {score}
+            <div
+              className="text-lg font-semibold tracking-[-0.02em] tabular-nums text-mist-950 transition-[color] duration-300 dark:text-white"
+              aria-label={`Fit score ${score} out of 100`}
+            >
+              {shownScore}
               <span className="text-xs font-normal text-mist-600 dark:text-mist-400">/100</span>
             </div>
             <span className="inline-flex items-center gap-0.5 rounded-full bg-gradient-to-r from-orange-500/12 to-rose-500/12 px-2 py-0.5 text-[11px] font-semibold text-rose-700 dark:from-orange-500/20 dark:to-rose-500/20 dark:text-rose-300">

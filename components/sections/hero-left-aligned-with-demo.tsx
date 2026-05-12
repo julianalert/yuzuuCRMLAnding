@@ -30,8 +30,8 @@ export function HeroLeftAlignedWithDemo({
         <div className={clsx('flex min-w-0 w-full flex-col', stackGapClassName)}>
           <div className="flex flex-col items-start gap-6">
             {eyebrow}
-            <Heading className="max-w-5xl">{headline}</Heading>
-            <Text size="lg" className="flex max-w-3xl flex-col gap-4">
+            <Heading className="max-w-7xl">{headline}</Heading>
+            <Text size="lg" className="flex max-w-7xl flex-col gap-4">
               {subheadline}
             </Text>
             {cta}
