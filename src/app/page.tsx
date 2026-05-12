@@ -1,5 +1,5 @@
 import { AnnouncementBadge } from '@/components/elements/announcement-badge'
-import { CalendlyEarlyAccessButtonLink, CalendlyHowItWorksLink } from '@/components/elements/calendly-tracking'
+import { CalendlyEarlyAccessButtonLink } from '@/components/elements/calendly-tracking'
 import { Main } from '@/components/elements/main'
 import { FeatureStatCard } from '@/components/elements/feature-stat-card'
 import { HeroLeadCards } from '@/components/lead-cards/hero-lead-cards'
@@ -82,13 +82,13 @@ export default function Page() {
             <AnnouncementBadge
               href="#call-to-action"
               text="free early access, no credit card · only 3 spots left"
-              cta="Get early access"
+              cta="Book a 15-min demo"
             />
           }
-          headline="Find new customers for your marketing agency on autopilot"
+          headline="Stop prospecting. Show up to call. Close deals."
           subheadline={
             <p>
-              Tell Yuzuu what you sell and where. It finds the local businesses that need it, scores them against your offer, and drafts the pitch. You just show up to the calls.
+              Tell Yuzuu what you sell and where. It fills your agency pipeline with scored, local leads. You only show up to the calls.
             </p>
           }
           cta={
@@ -156,7 +156,11 @@ export default function Page() {
         {/* Features */}
         <Features
           id="features"
-          eyebrow="Prospecting infrastructure built for busy agencies"
+          eyebrow={
+            <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-xs font-semibold uppercase tracking-wider text-transparent dark:from-orange-400 dark:to-rose-400">
+              Prospecting infrastructure built for busy agencies
+            </span>
+          }
           headline="Grow your revenue faster, all in one place"
           subheadline={
             <p>
@@ -164,12 +168,13 @@ export default function Page() {
             </p>
           }
           cta={
-            <CalendlyHowItWorksLink className="inline-flex items-center gap-2 text-sm/7 font-semibold transition-opacity hover:opacity-80">
-              <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-transparent">
-                Book a 15‑min demo
-              </span>
-              <ArrowNarrowRightIcon className="shrink-0 text-rose-500" />
-            </CalendlyHowItWorksLink>
+            <CalendlyEarlyAccessButtonLink
+              size="lg"
+              className="!w-fit self-start inline-flex !items-center !gap-2 !bg-gradient-to-r !from-orange-500 !to-rose-500 !font-semibold !text-white !shadow-lg hover:!from-orange-600 hover:!to-rose-600"
+            >
+              Book a 15‑min demo
+              <ArrowNarrowRightIcon className="size-3.5 shrink-0" aria-hidden />
+            </CalendlyEarlyAccessButtonLink>
           }
           features={
             <>
@@ -281,7 +286,11 @@ export default function Page() {
 
         <StatsWithGraph
           id="stats"
-          eyebrow="Time to value"
+          eyebrow={
+            <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-xs font-semibold uppercase tracking-wider text-transparent dark:from-orange-400 dark:to-rose-400">
+              Time to value
+            </span>
+          }
           headline="Yuzuu starts working for you right away"
           subheadline={
             <p>
