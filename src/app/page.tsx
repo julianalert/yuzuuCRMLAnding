@@ -6,11 +6,7 @@ import { Main } from '@/components/elements/main'
 import { FeatureStatCard } from '@/components/elements/feature-stat-card'
 import { HeroLeadCards } from '@/components/lead-cards/hero-lead-cards'
 import { ArrowNarrowRightIcon } from '@/components/icons/arrow-narrow-right-icon'
-import { ClockIcon } from '@/components/icons/clock-icon'
 import { CheckmarkIcon } from '@/components/icons/checkmark-icon'
-import { MailIcon } from '@/components/icons/mail-icon'
-import { RepeatIcon } from '@/components/icons/repeat-icon'
-import { TargetIcon } from '@/components/icons/target-icon'
 import { XIcon } from '@/components/icons/social/x-icon'
 import { CallToActionSimple } from '@/components/sections/call-to-action-simple'
 import { FAQsTwoColumnAccordion, Faq } from '@/components/sections/faqs-two-column-accordion'
@@ -22,7 +18,7 @@ import {
   NavbarLogo,
   NavbarWithLogoActionsAndCenteredLinks,
 } from '@/components/sections/navbar-with-logo-actions-and-centered-links'
-import { ProblemPainCard, ProblemPainPoints } from '@/components/sections/problem-pain-points'
+import { ProblemPainPoints } from '@/components/sections/problem-pain-points'
 import { Stat, StatsWithGraph } from '@/components/sections/stats-with-graph'
 
 export default function Page() {
@@ -85,14 +81,14 @@ export default function Page() {
           eyebrow={
             <AnnouncementBadge
               href="#call-to-action"
-              text="free early access, no credit card · 1 out of 3 spots left"
-              cta="Get early access"
+              text="‼️ 1 out of 3 spots left"
+              cta="Get free early access"
             />
           }
           headline="Stop prospecting. Show up to calls. Close deals."
           subheadline={
             <p>
-              Tell Yuzuu what you sell and where. It fills your agency pipeline with scored, local leads. You only show up to the calls.
+              Tell Yuzuu what you sell and where. It fills your marketing agency pipeline with scored local leads. You only show up to the calls.
             </p>
           }
           cta={
@@ -106,7 +102,7 @@ export default function Page() {
                 Get early access
               </CalendlyEarlyAccessButtonLink>
               <p className="flex items-center gap-2 text-sm italic text-mist-700 dark:text-mist-400">
-                you'll be granted early access
+                no credit card required
               </p>
             </div>
           }
@@ -118,15 +114,56 @@ export default function Page() {
           eyebrow="The problem"
           headline={
             <>
-              Finding new customers for your agency is painfully time-consuming today
+              It&apos;s Monday.
+              <br />
+              You need clients.
             </>
           }
           subheadline={
             <p>
-              Building a qualified list of local prospects still means living in Google Maps and spreadsheets, with
-              almost no signal on who actually needs what you sell before you reach out. 
+              Every agency owner knows this feeling. The pipeline&apos;s thin, the calendar&apos;s too open, and the
+              answer is obvious: go find more clients. The part nobody talks about is how brutal that actually is.
             </p>
           }
+          pains={[
+            {
+              label: 'Manual research',
+              scene: (
+                <>
+                  You spent Tuesday morning building a list of 40 restaurants. By Thursday you realized 12 already
+                  had agencies, 8 had just closed, and 6 had no contact info. <strong>Tuesday is gone.</strong>
+                </>
+              ),
+            },
+            {
+              label: 'No prioritization',
+              scene: (
+                <>
+                  Google Maps gives you 200 pins. It has no idea which one needs you and which one has a brother-in-law
+                  doing their SEO. <strong>Neither do you, until you click every single one.</strong>
+                </>
+              ),
+            },
+            {
+              label: 'Generic outreach',
+              scene: (
+                <>
+                  You don&apos;t know why they&apos;re a fit, so your email doesn&apos;t either.{' '}
+                  <strong>&ldquo;I help businesses like yours grow online&rdquo;</strong> lands in the same trash folder
+                  as the last 40 people who sent that.
+                </>
+              ),
+            },
+            {
+              label: 'No repeatable process',
+              scene: (
+                <>
+                  You do it one way. Your next hire does it differently. Neither of you remembers what you tried last
+                  month. <strong>Every week starts from scratch.</strong>
+                </>
+              ),
+            },
+          ]}
           quote={
             <p>
               I spend half my week building lead lists in Google Maps, copy-pasting into spreadsheets, then still not
@@ -153,34 +190,20 @@ export default function Page() {
                   Clément Bernard
                 </a>
                 <span className="font-normal">
-                  {' '}
-                  — Local SEO Marketing Agency Owner
+                  , Local SEO Marketing Agency Owner
                 </span>
               </span>
             </span>
           }
-        >
-          <ProblemPainCard
-            icon={<ClockIcon className="size-5" />}
-            headline="Hours wasted on manual research"
-            description="You open dozens of listings, skim sites and reviews, and still end up guessing whether a business is a fit."
-          />
-          <ProblemPainCard
-            icon={<TargetIcon className="size-5" />}
-            headline="No way to prioritise the list"
-            description="You scrape Google Maps, it gives you a raw dump of pins, not a ranked queue of who to call first based on your offer."
-          />
-          <ProblemPainCard
-            icon={<MailIcon className="size-5" />}
-            headline="Generic outreach that gets ignored"
-            description="Without clear signals per lead, cold email defaults to vague templates that never earn replies."
-          />
-          <ProblemPainCard
-            icon={<RepeatIcon className="size-5" />}
-            headline="No repeatable process"
-            description="Every rep does it differently: different tabs, notes, spreadsheets, so quality varies and nothing scales."
-          />
-        </ProblemPainPoints>
+          closing={
+            <p className="font-display text-lg italic leading-snug text-mist-950 dark:text-white sm:text-xl/8">
+              There&apos;s a better way to fill your pipeline:{' '}
+              <span className="bg-gradient-to-r from-orange-600 to-rose-600 bg-clip-text font-medium not-italic text-transparent dark:from-orange-400 dark:to-rose-400">
+                one that doesn&apos;t cost you your whole week.
+              </span>
+            </p>
+          }
+        />
 
         {/* Features */}
         <Features
@@ -190,10 +213,11 @@ export default function Page() {
               Prospecting infrastructure built for busy agencies
             </span>
           }
-          headline="Grow your revenue faster, all in one place"
+          headline="More clients. Less prospecting."
           subheadline={
             <p>
-              Yuzuu agents automate demand gen, pipeline management, and follow-ups so you can spend your time with customers.
+              Yuzuu finds the leads, scores them, drafts the outreach, and fills your calendar. You show up to the
+              calls.
             </p>
           }
           cta={
@@ -217,7 +241,7 @@ export default function Page() {
                       emoji="🔥"
                       label="Warm opportunities"
                       value="350"
-                      caption="found this month"
+                      caption="local businesses found this month"
                       delta="+18%"
                       period="May 2026"
                     />
@@ -228,17 +252,14 @@ export default function Page() {
                     <span className="mb-2 block text-sm font-semibold tabular-nums text-mist-500 dark:text-mist-400">
                       01
                     </span>
-                    Leads keep flowing in, not only when someone squeezes in prospecting time
+                    Leads keep flowing in
                   </>
                 }
                 subheadline={
                   <>
                     <p>
-                      Your scored queue stays fed from Google Maps so there&apos;s always the next batch of local
-                      businesses to review, without another manual scrape or spreadsheet marathon.
-                    </p>
-                    <p className="pt-1 text-xs font-semibold tracking-wide text-mist-600 dark:text-mist-400">
-                      Always-on lead intake
+                      Your scored queue keeps filling from Google Maps. No manual scrape, no Tuesday morning lost to
+                      spreadsheets.
                     </p>
                   </>
                 }
@@ -251,7 +272,7 @@ export default function Page() {
                       emoji="📅"
                       label="Meetings booked"
                       value="24"
-                      caption="scheduled this month"
+                      caption="landed on your calendar"
                       delta="+12%"
                       period="May 2026"
                     />
@@ -262,17 +283,13 @@ export default function Page() {
                     <span className="mb-2 block text-sm font-semibold tabular-nums text-mist-500 dark:text-mist-400">
                       02
                     </span>
-                    Meetings booked on autopilot, not endless scheduling ping-pong
+                    Meetings booked
                   </>
                 }
                 subheadline={
                   <>
                     <p>
-                      Outreach runs on rails: drafts, reminders, and hand-offs so interested prospects land on your
-                      calendar while you stay focused on the conversations that close deals.
-                    </p>
-                    <p className="pt-1 text-xs font-semibold tracking-wide text-mist-600 dark:text-mist-400">
-                      Calendar fills in the background
+                      Smart outreach runs, reminders go out, interested prospects book themselves in. You show up to the call.
                     </p>
                   </>
                 }
@@ -284,7 +301,7 @@ export default function Page() {
                       className="mx-auto w-full max-w-[min(30rem,100%)]"
                       emoji="📈"
                       label="Pipeline value"
-                      value="$67,204"
+                      value="$67k"
                       caption="in qualified stages"
                       delta="+24%"
                       period="May 2026"
@@ -296,17 +313,13 @@ export default function Page() {
                     <span className="mb-2 block text-sm font-semibold tabular-nums text-mist-500 dark:text-mist-400">
                       03
                     </span>
-                    Pipeline management that grows deal value, not just tidy columns
+                    Compounding pipeline value
                   </>
                 }
                 subheadline={
                   <>
                     <p>
-                      Stages, owners, and next steps stay visible in one place so opportunities don&apos;t stall. Less
-                      guesswork means faster progression, and a pipeline total that reflects real upside.
-                    </p>
-                    <p className="pt-1 text-xs font-semibold tracking-wide text-mist-600 dark:text-mist-400">
-                      Compounding pipeline value
+                    Pipeline management that grows deal value, not just tidy columns. Less guesswork means faster progression.
                     </p>
                   </>
                 }

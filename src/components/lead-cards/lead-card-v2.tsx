@@ -6,12 +6,24 @@ export type LeadCardV2Signal = {
   note: string
 }
 
+export type LeadCardV2BookedDemo = {
+  amount: number
+  unit: 'min' | 'hour' | 'day'
+}
+
+function formatBookedAgo({ amount, unit }: LeadCardV2BookedDemo) {
+  if (unit === 'min') return `${amount} min`
+  if (unit === 'hour') return `${amount} hour${amount === 1 ? '' : 's'}`
+  return `${amount} day${amount === 1 ? '' : 's'}`
+}
+
 export function LeadCardV2({
   ariaLabel,
   name,
   locationLine,
   score,
   displayScore,
+  bookedDemoAgo,
   signals,
   quote,
   className,
@@ -22,11 +34,14 @@ export function LeadCardV2({
   score: number
   /** When set (e.g. during a count-up), overrides the numeric display while keeping semantic `score` for context */
   displayScore?: number
+  /** Relative recency, e.g. call booked */
+  bookedDemoAgo?: LeadCardV2BookedDemo
   signals: LeadCardV2Signal[]
   quote: string
   className?: string
 }) {
   const shownScore = displayScore ?? score
+  const bookedPhrase = bookedDemoAgo ? formatBookedAgo(bookedDemoAgo) : null
   return (
     <article
       className={clsx(
@@ -48,18 +63,12 @@ export function LeadCardV2({
             </h3>
             <p className="mt-0.5 text-xs text-mist-600 dark:text-mist-400">{locationLine}</p>
           </div>
-          <div className="flex shrink-0 flex-col items-end gap-[5px]">
-            <div
-              className="text-lg font-semibold tracking-[-0.02em] tabular-nums text-mist-950 transition-[color] duration-300 dark:text-white"
-              aria-label={`Fit score ${score} out of 100`}
-            >
-              {shownScore}
-              <span className="text-xs font-normal text-mist-600 dark:text-mist-400">/100</span>
-            </div>
-            <span className="inline-flex items-center gap-0.5 rounded-full bg-gradient-to-r from-orange-500/12 to-rose-500/12 px-2 py-0.5 text-[11px] font-semibold text-rose-700 dark:from-orange-500/20 dark:to-rose-500/20 dark:text-rose-300">
-              <span aria-hidden>🔥</span>
-              <span>Warm lead</span>
-            </span>
+          <div
+            className="shrink-0 text-lg font-semibold tracking-[-0.02em] tabular-nums text-mist-950 transition-[color] duration-300 dark:text-white"
+            aria-label={`Fit score ${score} out of 100`}
+          >
+            {shownScore}
+            <span className="text-xs font-normal text-mist-600 dark:text-mist-400">/100</span>
           </div>
         </div>
 
@@ -94,6 +103,21 @@ export function LeadCardV2({
             &ldquo;{quote}&rdquo;
           </p>
         </div>
+
+        {bookedPhrase ? (
+          <div
+            className={clsx(
+              'mt-4 flex items-center gap-2 rounded-lg border px-3 py-2 text-[13px] font-medium tabular-nums',
+              'border-orange-500/20 bg-gradient-to-r from-orange-500/10 to-rose-500/10 text-mist-950',
+              'dark:border-orange-400/25 dark:from-orange-500/15 dark:to-rose-500/15 dark:text-white',
+            )}
+          >
+            <span className="text-[15px] leading-none" aria-hidden>
+              🔥
+            </span>
+            <span>Booked a call {bookedPhrase} ago</span>
+          </div>
+        ) : null}
       </div>
     </article>
   )

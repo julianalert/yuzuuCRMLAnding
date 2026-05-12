@@ -10,6 +10,7 @@ const cards = [
     name: 'Skyline Motors NYC',
     locationLine: 'Car dealership · Chelsea, Manhattan',
     score: 91,
+    bookedDemoAgo: { amount: 38, unit: 'min' as const },
     signals: [
       {
         severity: 'red' as const,
@@ -35,6 +36,7 @@ const cards = [
     name: 'Pulse Fitness',
     locationLine: 'Gym · Greenwich Village, Manhattan',
     score: 79,
+    bookedDemoAgo: { amount: 2, unit: 'hour' as const },
     signals: [
       {
         severity: 'red' as const,
@@ -60,6 +62,7 @@ const cards = [
     name: 'Moreau & Associates LLP',
     locationLine: 'Law firm · Midtown, Manhattan',
     score: 85,
+    bookedDemoAgo: { amount: 1, unit: 'day' as const },
     signals: [
       {
         severity: 'red' as const,
@@ -85,6 +88,7 @@ const cards = [
     name: 'Hudson River Art Museum',
     locationLine: 'Fine arts museum · Upper West Side, Manhattan',
     score: 74,
+    bookedDemoAgo: { amount: 52, unit: 'min' as const },
     signals: [
       {
         severity: 'red' as const,
@@ -110,6 +114,7 @@ const cards = [
     name: 'Dupont Plumbing Co.',
     locationLine: "Plumbing contractor · Hell's Kitchen, Manhattan",
     score: 88,
+    bookedDemoAgo: { amount: 6, unit: 'hour' as const },
     signals: [
       {
         severity: 'red' as const,
@@ -135,6 +140,7 @@ const cards = [
     name: "Marco's Kitchen",
     locationLine: 'Italian restaurant · Little Italy, Manhattan',
     score: 91,
+    bookedDemoAgo: { amount: 2, unit: 'day' as const },
     signals: [
       {
         severity: 'red' as const,
@@ -237,7 +243,7 @@ export function HeroLeadCards() {
   }, [])
 
   return (
-    <div ref={sectionRef} className="hero-lead-cards-outer">
+    <div ref={sectionRef} className="hero-lead-cards-outer flex flex-col gap-3">
       <div
         className="hero-lead-cards-slider"
         role="region"
@@ -255,6 +261,14 @@ export function HeroLeadCards() {
           ))}
         </div>
       </div>
+      <p
+        className="w-full min-w-0 border-l-2 border-orange-500/25 pl-3 text-[13px] leading-relaxed text-mist-500 dark:border-orange-400/30 dark:text-mist-400"
+        role="note"
+      >
+        This is how your pipeline will look like, all automated. Illustrated with what Yuzuu surfaced for a NYC-based social media agency
+        last week. Every card is a real local business scored against a real agency offer; this is what lands in your
+        queue on day one. 
+      </p>
     </div>
   )
 }
