@@ -262,7 +262,7 @@ export function HeroLeadCards() {
         </div>
       </div>
       <p
-        className="w-full min-w-0 border-l-2 border-orange-500/25 pl-3 text-[13px] leading-relaxed text-mist-500 dark:border-orange-400/30 dark:text-mist-400"
+        className="w-full min-w-0 border-l-2 border-emerald-500/30 pl-3 text-[13px] leading-relaxed text-mist-500 dark:border-emerald-400/35 dark:text-mist-400"
         role="note"
       >
         This is how your pipeline will look like, all automated. Illustrated with what Yuzuu surfaced for a NYC-based social media agency

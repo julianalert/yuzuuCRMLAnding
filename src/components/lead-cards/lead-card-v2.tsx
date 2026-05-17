@@ -52,7 +52,7 @@ export function LeadCardV2({
       aria-label={ariaLabel}
     >
       <div
-        className="h-1 bg-gradient-to-r from-orange-500 to-rose-500"
+        className="h-1 bg-gradient-to-r from-emerald-500 to-teal-500 dark:from-emerald-400 dark:to-teal-500"
         aria-hidden
       />
       <div className="px-5 pb-[22px] pt-[18px]">
@@ -80,9 +80,9 @@ export function LeadCardV2({
               <span
                 className={clsx(
                   'mt-[5px] size-1.5 shrink-0 rounded-full',
-                  s.severity === 'red' ? 'bg-red-500' : 'bg-orange-500',
+                  s.severity === 'red' ? 'bg-emerald-600 dark:bg-emerald-500' : 'bg-teal-500 dark:bg-teal-400',
                 )}
-                aria-label={s.severity === 'red' ? 'Critical' : 'Warning'}
+                aria-label={s.severity === 'red' ? 'Key fit signal' : 'Fit signal'}
               />
               <span className="text-[13px] leading-snug text-mist-950 dark:text-mist-100">
                 {s.title}
@@ -96,7 +96,7 @@ export function LeadCardV2({
 
         <div className="relative pl-3">
           <span
-            className="absolute bottom-0 left-0 top-0 w-0.5 rounded-full bg-gradient-to-b from-orange-500 to-rose-500"
+            className="absolute bottom-0 left-0 top-0 w-0.5 rounded-full bg-gradient-to-b from-emerald-500 to-teal-600 dark:from-emerald-400 dark:to-teal-500"
             aria-hidden
           />
           <p className="text-[13px] font-normal italic leading-snug text-mist-600 dark:text-mist-400">
@@ -108,12 +108,12 @@ export function LeadCardV2({
           <div
             className={clsx(
               'mt-4 flex items-center gap-2 rounded-lg border px-3 py-2 text-[13px] font-medium tabular-nums',
-              'border-orange-500/20 bg-gradient-to-r from-orange-500/10 to-rose-500/10 text-mist-950',
-              'dark:border-orange-400/25 dark:from-orange-500/15 dark:to-rose-500/15 dark:text-white',
+              'border-emerald-500/25 bg-gradient-to-r from-emerald-500/10 to-teal-500/10 text-mist-950',
+              'dark:border-emerald-400/30 dark:from-emerald-500/15 dark:to-teal-500/15 dark:text-white',
             )}
           >
             <span className="text-[15px] leading-none" aria-hidden>
-              🔥
+              📞
             </span>
             <span>Booked a call {bookedPhrase} ago</span>
           </div>

@@ -85,7 +85,7 @@ export default function Page() {
               cta="Get free early access"
             />
           }
-          headline="Stop prospecting. Show up to calls. Close deals."
+          headline="Find new customers for your marketing agency on autopilot"
           subheadline={
             <p>
               Tell Yuzuu what you sell and where. It fills your marketing agency pipeline with scored local leads. You only show up to the calls.
@@ -190,7 +190,7 @@ export default function Page() {
                   Clément Bernard
                 </a>
                 <span className="font-normal">
-                  , Local SEO Marketing Agency Owner
+                  , Owner @ Vision - Local SEO Marketing Agency
                 </span>
               </span>
             </span>
@@ -216,8 +216,8 @@ export default function Page() {
           headline="More clients. Less prospecting."
           subheadline={
             <p>
-              Yuzuu finds the leads, scores them, drafts the outreach, and fills your calendar. You show up to the
-              calls.
+              Yuzuu finds the leads, scores them, drafts the outreach, and fills your calendar. You only show up to
+              the calls.
             </p>
           }
           cta={
@@ -252,7 +252,7 @@ export default function Page() {
                     <span className="mb-2 block text-sm font-semibold tabular-nums text-mist-500 dark:text-mist-400">
                       01
                     </span>
-                    Leads keep flowing in
+                    Warm leads keep flowing in
                   </>
                 }
                 subheadline={
@@ -332,7 +332,7 @@ export default function Page() {
           id="stats"
           eyebrow={
             <span className="bg-gradient-to-r from-orange-500 to-rose-500 bg-clip-text text-xs font-semibold uppercase tracking-wider text-transparent dark:from-orange-400 dark:to-rose-400">
-              Time to value
+              First meeting booked in a few days
             </span>
           }
           headline="Yuzuu starts working for you right away"
@@ -408,7 +408,7 @@ export default function Page() {
                         <span className="flex h-7 shrink-0 items-center" aria-hidden>
                           <span className="size-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-green-600" />
                         </span>
-                        <span className="min-w-0 flex-1 leading-7">Draft is pre-written for you</span>
+                        <span className="min-w-0 flex-1 leading-7">Smart outreach is drafted for you</span>
                       </li>
                     </ul>
                   </div>
@@ -557,7 +557,7 @@ export default function Page() {
         <CallToActionSimple
           id="call-to-action"
           subheadlineFullWidth
-          headline="We're looking for 3 more agencies to use Yuzuu for free"
+          headline="We're looking for 1 more agency to use Yuzuu for free"
           subheadline={
             <>
               <p>
