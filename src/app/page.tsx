@@ -595,7 +595,7 @@ export default function Page() {
                 size="lg"
                 className="!bg-gradient-to-r !from-orange-500 !to-rose-500 !text-white !shadow-lg hover:!from-orange-600 hover:!to-rose-600"
               >
-                Get early access
+                Book a 15‑min call
               </CalendlyEarlyAccessButtonLink>
             </div>
           }

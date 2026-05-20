@@ -80,9 +80,9 @@ export function LeadCardV2({
               <span
                 className={clsx(
                   'mt-[5px] size-1.5 shrink-0 rounded-full',
-                  s.severity === 'red' ? 'bg-emerald-600 dark:bg-emerald-500' : 'bg-teal-500 dark:bg-teal-400',
+                  s.severity === 'red' ? 'bg-red-500' : 'bg-orange-500',
                 )}
-                aria-label={s.severity === 'red' ? 'Key fit signal' : 'Fit signal'}
+                aria-label={s.severity === 'red' ? 'Critical' : 'Warning'}
               />
               <span className="text-[13px] leading-snug text-mist-950 dark:text-mist-100">
                 {s.title}
